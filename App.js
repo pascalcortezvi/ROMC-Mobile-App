@@ -14,84 +14,107 @@ import ProductScreen from "./screens/ProductScreen";
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-// Create a stack navigator for the Shop
-function ShopStack() {
+// Individual Stack Navigator for each Tab
+function HomeStack() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Shop"
-        component={ShopScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Product"
-        component={ProductScreen}
-        options={{ headerShown: false }} // Add this line
-      />
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      <Stack.Screen name="Product" component={ProductScreen} />
     </Stack.Navigator>
   );
 }
 
+function ShopStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="ShopScreen" component={ShopScreen} />
+      <Stack.Screen name="Product" component={ProductScreen} />
+    </Stack.Navigator>
+  );
+}
+
+function AccountStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="AccountScreen" component={AccountScreen} />
+      <Stack.Screen name="Product" component={ProductScreen} />
+    </Stack.Navigator>
+  );
+}
+
+function CartStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="CartScreen" component={CartScreen} />
+      <Stack.Screen name="Product" component={ProductScreen} />
+    </Stack.Navigator>
+  );
+}
+
+// Main Tab Navigator
+function MainTabNavigator() {
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        tabBarStyle: styles.tabBar,
+        tabBarActiveTintColor: "#D80000",
+      }}
+    >
+      <Tab.Screen
+        name="Home"
+        component={HomeStack}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Shop"
+        component={ShopStack}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="view-module"
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Accounts"
+        component={AccountStack}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Cart"
+        component={CartStack}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="cart" color={color} size={size} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
+
+// App Component
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <Header />
       <NavigationContainer>
-        <Tab.Navigator
-          screenOptions={{
-            tabBarStyle: styles.tabBar,
-            tabBarActiveTintColor: "#D80000",
-          }}
-        >
-          <Tab.Screen
-            name="home"
-            component={HomeScreen}
-            options={{
-              headerShown: false,
-              tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons name="home" color={color} size={size} />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Shop"
-            component={ShopStack} // Use ShopStack here
-            options={{
-              headerShown: false,
-              tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons
-                  name="view-module"
-                  color={color}
-                  size={size}
-                />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Accounts"
-            component={AccountScreen}
-            options={{
-              headerShown: false,
-              tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons
-                  name="account"
-                  color={color}
-                  size={size}
-                />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="cart"
-            component={CartScreen}
-            options={{
-              headerShown: false,
-              tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons name="cart" color={color} size={size} />
-              ),
-            }}
-          />
-        </Tab.Navigator>
+        <MainTabNavigator />
       </NavigationContainer>
     </SafeAreaView>
   );

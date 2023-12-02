@@ -6,14 +6,14 @@ import {
   Image,
   FlatList,
   Animated,
-  TouchableOpacity,
+  TouchableWithoutFeedback,
 } from "react-native";
 
 const SkeletonLoader = () => {
   const fadeAnim = new Animated.Value(0.5);
 
   useEffect(() => {
-    Animated.loop(
+    const animation = Animated.loop(
       Animated.sequence([
         Animated.timing(fadeAnim, {
           toValue: 1,
@@ -26,7 +26,11 @@ const SkeletonLoader = () => {
           useNativeDriver: true,
         }),
       ])
-    ).start();
+    );
+
+    animation.start();
+
+    return () => animation.stop(); // Cleanup animation on unmount
   }, [fadeAnim]);
 
   return (
@@ -78,13 +82,7 @@ export default function FeaturedCollection({
     <View style={styles.component}>
       <View style={styles.header}>
         <Text style={styles.collectionTitle}>{collectionName}</Text>
-        <TouchableOpacity
-          onPress={() => {
-            /* handle view all action */
-          }}
-        >
-          <Text style={styles.viewAllButton}>View All</Text>
-        </TouchableOpacity>
+        <Text style={styles.viewAllButton}>View All</Text>
       </View>
       {isLoading ? (
         <FlatList
@@ -100,12 +98,14 @@ export default function FeaturedCollection({
           horizontal
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
-            <View style={styles.productContainer}>
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate("Product", { product: item })
-                }
-              >
+            <TouchableWithoutFeedback
+              onPress={() =>
+                navigation.navigate("Product", {
+                  productId: item.id.split("/").pop(),
+                })
+              }
+            >
+              <View style={styles.productContainer}>
                 {item.imageUrl && (
                   <View style={styles.productImageContainer}>
                     <Image
@@ -116,8 +116,8 @@ export default function FeaturedCollection({
                 )}
                 <Text style={styles.productPrice}>{item.price}</Text>
                 <Text style={styles.productTitle}>{item.title}</Text>
-              </TouchableOpacity>
-            </View>
+              </View>
+            </TouchableWithoutFeedback>
           )}
         />
       )}
@@ -173,7 +173,6 @@ const styles = StyleSheet.create({
   // Skeleton styles
   skeletonContainer: {
     padding: 20,
-    borderWidth: 1,
     borderRadius: 10,
     backgroundColor: "#E1E1E1",
     margin: 10,
