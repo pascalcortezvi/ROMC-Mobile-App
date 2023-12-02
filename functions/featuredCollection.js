@@ -18,7 +18,7 @@ const featuredCollection = functions.https.onRequest((request, response) => {
     const graphqlQuery = JSON.stringify({
       query: `{
         collection(id: "${collectionId}") {
-          products(first: 6) {
+          products(first: 8) {
             nodes {
               id
               images(first: 1) {

@@ -1,10 +1,40 @@
-import React from "react";
-import { ScrollView, StyleSheet } from "react-native";
+import React, { useState, useCallback } from "react";
+import { ScrollView, StyleSheet, RefreshControl } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import FeaturedCollection from "../components/FeaturedCollection";
 
 export default function HomeScreen({ navigation }) {
+  const [refreshing, setRefreshing] = useState(false);
+
+  // Existing useFocusEffect for fetching data when the screen gains focus
+  useFocusEffect(
+    useCallback(() => {
+      console.log("HomeScreen is focused");
+      // Here you can call a function to fetch or refresh data
+      // fetchData();
+      return () => {
+        // Optional cleanup if needed
+      };
+    }, [])
+  );
+
+  const onRefresh = useCallback(() => {
+    // Add your data fetching or refreshing logic here
+    console.log("Refreshing data...");
+    setRefreshing(true);
+    // Simulate a network request
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 500);
+  }, []);
+
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
       <FeaturedCollection
         collectionName="Podcast"
         collectionId="273926979663"

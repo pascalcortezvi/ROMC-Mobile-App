@@ -1,46 +1,13 @@
 import React, { useState, useEffect } from "react";
 import {
   View,
-  StyleSheet,
   Text,
   Image,
+  StyleSheet,
   FlatList,
-  Animated,
   TouchableWithoutFeedback,
+  ActivityIndicator,
 } from "react-native";
-
-const SkeletonLoader = () => {
-  const fadeAnim = new Animated.Value(0.5);
-
-  useEffect(() => {
-    const animation = Animated.loop(
-      Animated.sequence([
-        Animated.timing(fadeAnim, {
-          toValue: 1,
-          duration: 1000,
-          useNativeDriver: true,
-        }),
-        Animated.timing(fadeAnim, {
-          toValue: 0.5,
-          duration: 1000,
-          useNativeDriver: true,
-        }),
-      ])
-    );
-
-    animation.start();
-
-    return () => animation.stop(); // Cleanup animation on unmount
-  }, [fadeAnim]);
-
-  return (
-    <Animated.View style={{ ...styles.skeletonContainer, opacity: fadeAnim }}>
-      <View style={styles.skeletonImage} />
-      <View style={styles.skeletonText} />
-      <View style={styles.skeletonText} />
-    </Animated.View>
-  );
-};
 
 export default function FeaturedCollection({
   collectionName,
@@ -84,13 +51,11 @@ export default function FeaturedCollection({
         <Text style={styles.collectionTitle}>{collectionName}</Text>
         <Text style={styles.viewAllButton}>View All</Text>
       </View>
+
       {isLoading ? (
-        <FlatList
-          data={Array(5).fill({})}
-          keyExtractor={(item, index) => index.toString()}
-          horizontal
-          renderItem={() => <SkeletonLoader />}
-        />
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="black" />
+        </View>
       ) : (
         <FlatList
           data={products}
@@ -170,25 +135,9 @@ const styles = StyleSheet.create({
   productTitle: {
     fontWeight: "bold",
   },
-  // Skeleton styles
-  skeletonContainer: {
-    padding: 20,
-    borderRadius: 10,
-    backgroundColor: "#E1E1E1",
-    margin: 10,
-    width: 220,
+  loadingContainer: {
+    height: 200,
+    justifyContent: "center",
     alignItems: "center",
-  },
-  skeletonImage: {
-    width: 150,
-    height: 150,
-    backgroundColor: "#C4C4C4",
-    marginBottom: 10,
-  },
-  skeletonText: {
-    height: 20,
-    width: "80%",
-    backgroundColor: "#C4C4C4",
-    marginBottom: 10,
   },
 });
