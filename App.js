@@ -21,12 +21,16 @@ export default function App() {
           }}
         >
           <Tab.Screen
-            name="Shop"
+            name="shop"
             component={ShopScreen}
             options={{
               headerShown: false,
               tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons name="shopping" color={color} size={size} />
+                <MaterialCommunityIcons
+                  name="shopping"
+                  color={color}
+                  size={size}
+                />
               ),
             }}
           />

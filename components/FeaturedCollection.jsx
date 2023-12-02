@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, ScrollView, Image } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  ScrollView,
+  Image,
+  FlatList,
+} from "react-native";
 
 export default function FeaturedCollection({ collectionName, collectionId }) {
   const [products, setProducts] = useState([]);
@@ -21,30 +28,40 @@ export default function FeaturedCollection({ collectionName, collectionId }) {
   }, [collectionId]);
 
   return (
-    <ScrollView>
+    <View style={styles.component}>
       <View style={styles.header}>
         <Text style={styles.collectionTitle}>{collectionName}</Text>
       </View>
-      {products.map((product, index) => (
-        <View key={index} style={styles.productContainer}>
-          {product.images.edges.length > 0 && (
-            <View style={styles.productImageContainer}>
-              <Image
-                source={{ uri: product.images.edges[0].node.src }}
-                style={styles.productImage}
-              />
-            </View>
-          )}
-          <Text>{product.title}</Text>
-        </View>
-      ))}
-    </ScrollView>
+      <FlatList
+        data={products}
+        keyExtractor={(item) => item.id.toString()}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        renderItem={({ item }) => (
+          <View style={styles.productContainer}>
+            {item.images.edges.length > 0 && (
+              <View style={styles.productImageContainer}>
+                <Image
+                  source={{ uri: item.images.edges[0].node.src }}
+                  style={styles.productImage}
+                />
+              </View>
+            )}
+            <Text>{item.title}</Text>
+          </View>
+        )}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  component: {
+    marginTop:40,
+    marginBottom:40,
+  },
   header: {
-    height: 140,
+    height: 50,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -55,9 +72,13 @@ const styles = StyleSheet.create({
     padding: 20,
     borderWidth: 1,
     borderBottomColor: "#ddd",
+    width: 200,
   },
   productImageContainer: {
-    backgroundColor: "#fff",
+    padding: 20,
+    backgroundColor: "red",
+    display: "flex",
+    alignItems: "center", // Center the image horizontally
   },
   productImage: {
     width: 100,
