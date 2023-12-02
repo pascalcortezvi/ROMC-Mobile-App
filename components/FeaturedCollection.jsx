@@ -38,7 +38,11 @@ const SkeletonLoader = () => {
   );
 };
 
-export default function FeaturedCollection({ collectionName, collectionId }) {
+export default function FeaturedCollection({
+  collectionName,
+  collectionId,
+  navigation,
+}) {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -97,16 +101,22 @@ export default function FeaturedCollection({ collectionName, collectionId }) {
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <View style={styles.productContainer}>
-              {item.imageUrl && (
-                <View style={styles.productImageContainer}>
-                  <Image
-                    source={{ uri: item.imageUrl }}
-                    style={styles.productImage}
-                  />
-                </View>
-              )}
-              <Text style={styles.productPrice}>{item.price}</Text>
-              <Text style={styles.productTitle}>{item.title}</Text>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("Product", { product: item })
+                }
+              >
+                {item.imageUrl && (
+                  <View style={styles.productImageContainer}>
+                    <Image
+                      source={{ uri: item.imageUrl }}
+                      style={styles.productImage}
+                    />
+                  </View>
+                )}
+                <Text style={styles.productPrice}>{item.price}</Text>
+                <Text style={styles.productTitle}>{item.title}</Text>
+              </TouchableOpacity>
             </View>
           )}
         />

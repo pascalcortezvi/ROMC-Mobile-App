@@ -8,18 +8,22 @@ export default function HomeScreen({ navigation }) {
       <FeaturedCollection
         collectionName="Podcast"
         collectionId="273926979663"
+        navigation={navigation}
       />
       <FeaturedCollection
-        collectionName="Digital Cameras"
-        collectionId="80792649798"
+        collectionName="Audio Interfaces"
+        collectionId="80775544902"
+        navigation={navigation}
       />
       <FeaturedCollection
-        collectionName="Digital Cameras"
-        collectionId="80792649798"
+        collectionName="Electric Guitars"
+        collectionId="80842620998"
+        navigation={navigation}
       />
       <FeaturedCollection
-        collectionName="Digital Cameras"
-        collectionId="80792649798"
+        collectionName="Recorders"
+        collectionId="80777019462"
+        navigation={navigation}
       />
     </ScrollView>
   );
