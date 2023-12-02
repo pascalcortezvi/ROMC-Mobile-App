@@ -13,7 +13,7 @@ export default function Header() {
 
 const styles = StyleSheet.create({
   header: {
-    height: 140,
+    height: 100,
     backgroundColor: "black",
     alignItems: "center",
     justifyContent: "center",
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   logo: {
-    width: 200,
+    width: 120,
     height: 100,
     resizeMode: "contain",
   },

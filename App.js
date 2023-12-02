@@ -1,7 +1,8 @@
 import React from "react";
-import { View } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Header from "./components/Header";
 import ShopScreen from "./screens/ShopScreen";
 import CartScreen from "./screens/CartScreen";
@@ -10,22 +11,47 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView style={styles.container}>
       <Header />
       <NavigationContainer>
-        <Tab.Navigator>
+        <Tab.Navigator
+          screenOptions={{
+            tabBarStyle: styles.tabBar,
+            tabBarActiveTintColor: "#D80000",
+          }}
+        >
           <Tab.Screen
-            name="ShopScreen"
+            name="Shop"
             component={ShopScreen}
-            options={{ headerShown: false }} // Add this line
+            options={{
+              headerShown: false,
+              tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="shopping" color={color} size={size} />
+              ),
+            }}
           />
           <Tab.Screen
-            name="CartScreen"
+            name="home"
             component={CartScreen}
-            options={{ headerShown: false }} // Add this line
+            options={{
+              headerShown: false,
+              tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="cart" color={color} size={size} />
+              ),
+            }}
           />
         </Tab.Navigator>
       </NavigationContainer>
-    </View>
+    </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "black",
+  },
+  tabBar: {
+    backgroundColor: "black",
+  },
+});
