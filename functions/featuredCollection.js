@@ -19,18 +19,23 @@ const featuredCollection = functions.https.onRequest((request, response) => {
       query: `{
         collection(id: "${collectionId}") {
           products(first: 6) {
-            edges {
-              node {
-                id
-                title
-                images(first: 1) {
-                  edges {
-                    node {
-                      src
-                    }
+            nodes {
+              id
+              images(first: 1) {
+                edges {
+                  node {
+                    url
                   }
                 }
               }
+              title
+              priceRange {
+                minVariantPrice {
+                  amount
+                  currencyCode
+                }
+              }
+              handle
             }
           }
         }

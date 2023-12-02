@@ -1,6 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
 
-export default function CartScreen({ navigation }) {
+export default function CategoriesScreen({ navigation }) {
   return <></>;
 }

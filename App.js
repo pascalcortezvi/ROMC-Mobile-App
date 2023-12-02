@@ -4,7 +4,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Header from "./components/Header";
-import ShopScreen from "./screens/ShopScreen";
+import HomeScreen from "./screens/HomeScreen";
+import CategoriesScreen from "./screens/CategoriesScreen";
 import CartScreen from "./screens/CartScreen";
 
 const Tab = createBottomTabNavigator();
@@ -21,21 +22,27 @@ export default function App() {
           }}
         >
           <Tab.Screen
-            name="shop"
-            component={ShopScreen}
+            name="home"
+            component={HomeScreen}
             options={{
               headerShown: false,
               tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons
-                  name="shopping"
-                  color={color}
-                  size={size}
-                />
+                <MaterialCommunityIcons name="home" color={color} size={size} />
               ),
             }}
           />
           <Tab.Screen
-            name="home"
+            name="Categories"
+            component={CategoriesScreen}
+            options={{
+              headerShown: false,
+              tabBarIcon: ({ color, size }) => (
+                <MaterialCommunityIcons name="view-grid" color={color} size={size} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="cart"
             component={CartScreen}
             options={{
               headerShown: false,
