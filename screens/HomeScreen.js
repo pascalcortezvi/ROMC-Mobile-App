@@ -6,8 +6,8 @@ export default function HomeScreen({ navigation }) {
   return (
     <ScrollView style={styles.container}>
       <FeaturedCollection
-        collectionName="Digital Cameras"
-        collectionId="80792649798"
+        collectionName="Podcast"
+        collectionId="273926979663"
       />
       <FeaturedCollection
         collectionName="Digital Cameras"
