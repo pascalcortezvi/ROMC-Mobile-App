@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import { ScrollView, StyleSheet, RefreshControl } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
+import Banner from "../components/Banner";
 import FeaturedCollection from "../components/FeaturedCollection";
 
 export default function HomeScreen({ navigation }) {
@@ -35,6 +36,7 @@ export default function HomeScreen({ navigation }) {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
+      <Banner />
       <FeaturedCollection
         collectionName="Podcast"
         collectionId="273926979663"

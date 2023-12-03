@@ -44,7 +44,7 @@ const featuredCollection = functions.https.onRequest((request, response) => {
 
     try {
       const shopifyResponse = await fetch(
-        `https://${shopifyDomain}/api/2021-04/graphql.json`,
+        `https://${shopifyDomain}/api/2023-10/graphql.json`,
         {
           method: "POST",
           headers: {

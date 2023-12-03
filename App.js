@@ -57,7 +57,7 @@ function MainTabNavigator() {
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: styles.tabBar,
-        tabBarActiveTintColor: "#D80000",
+        tabBarActiveTintColor: "red",
       }}
     >
       <Tab.Screen

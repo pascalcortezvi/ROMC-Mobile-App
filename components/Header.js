@@ -1,13 +1,16 @@
 import React from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, TextInput } from "react-native";
 
 export default function Header() {
   return (
-    <>
-      <View style={styles.header}>
-        <Image source={require("../assets/logo.webp")} style={styles.logo} />
-      </View>
-    </>
+    <View style={styles.header}>
+      <TextInput
+        placeholderTextColor="white"
+        placeholder="Search musicredone.com"
+        style={styles.searchBar}
+        selectionColor="white"
+      />
+    </View>
   );
 }
 
@@ -17,14 +20,16 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     alignItems: "center",
     justifyContent: "center",
+    paddingHorizontal: 20,
   },
-  headerText: {
+  searchBar: {
+    height: 50,
+    backgroundColor: "#646464",
+    borderRadius: 10,
+    width: "100%",
+    paddingHorizontal: 15,
+    fontSize: 16,
     color: "white",
-    fontSize: 20,
-  },
-  logo: {
-    width: 120,
-    height: 100,
-    resizeMode: "contain",
+    borderWidth: 1,
   },
 });
