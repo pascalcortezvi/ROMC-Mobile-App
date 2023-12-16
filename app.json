@@ -15,7 +15,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.pascalcortezvi.redonemusiccanada"
     },
     "android": {
       "adaptiveIcon": {
@@ -25,6 +26,17 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "83bd8692-0dc2-4624-8c7b-0263a4c1d708"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/83bd8692-0dc2-4624-8c7b-0263a4c1d708"
     }
   }
 }
