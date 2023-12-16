@@ -1,0 +1,905 @@
+diff --git a/node_modules/@react-navigation/stack/LICENSE b/node_modules/@react-navigation/stack/LICENSE
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/README.md b/node_modules/@react-navigation/stack/README.md
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/TransitionConfigs/CardStyleInterpolators.js b/node_modules/@react-navigation/stack/lib/commonjs/TransitionConfigs/CardStyleInterpolators.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/TransitionConfigs/CardStyleInterpolators.js.map b/node_modules/@react-navigation/stack/lib/commonjs/TransitionConfigs/CardStyleInterpolators.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/TransitionConfigs/HeaderStyleInterpolators.js b/node_modules/@react-navigation/stack/lib/commonjs/TransitionConfigs/HeaderStyleInterpolators.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/TransitionConfigs/HeaderStyleInterpolators.js.map b/node_modules/@react-navigation/stack/lib/commonjs/TransitionConfigs/HeaderStyleInterpolators.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/TransitionConfigs/TransitionPresets.js b/node_modules/@react-navigation/stack/lib/commonjs/TransitionConfigs/TransitionPresets.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/TransitionConfigs/TransitionPresets.js.map b/node_modules/@react-navigation/stack/lib/commonjs/TransitionConfigs/TransitionPresets.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/TransitionConfigs/TransitionSpecs.js b/node_modules/@react-navigation/stack/lib/commonjs/TransitionConfigs/TransitionSpecs.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/TransitionConfigs/TransitionSpecs.js.map b/node_modules/@react-navigation/stack/lib/commonjs/TransitionConfigs/TransitionSpecs.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/index.js b/node_modules/@react-navigation/stack/lib/commonjs/index.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/index.js.map b/node_modules/@react-navigation/stack/lib/commonjs/index.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/navigators/createStackNavigator.js b/node_modules/@react-navigation/stack/lib/commonjs/navigators/createStackNavigator.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/navigators/createStackNavigator.js.map b/node_modules/@react-navigation/stack/lib/commonjs/navigators/createStackNavigator.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/types.js b/node_modules/@react-navigation/stack/lib/commonjs/types.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/types.js.map b/node_modules/@react-navigation/stack/lib/commonjs/types.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/CardAnimationContext.js b/node_modules/@react-navigation/stack/lib/commonjs/utils/CardAnimationContext.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/CardAnimationContext.js.map b/node_modules/@react-navigation/stack/lib/commonjs/utils/CardAnimationContext.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/GestureHandlerRefContext.js b/node_modules/@react-navigation/stack/lib/commonjs/utils/GestureHandlerRefContext.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/GestureHandlerRefContext.js.map b/node_modules/@react-navigation/stack/lib/commonjs/utils/GestureHandlerRefContext.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/ModalPresentationContext.js b/node_modules/@react-navigation/stack/lib/commonjs/utils/ModalPresentationContext.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/ModalPresentationContext.js.map b/node_modules/@react-navigation/stack/lib/commonjs/utils/ModalPresentationContext.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/conditional.js b/node_modules/@react-navigation/stack/lib/commonjs/utils/conditional.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/conditional.js.map b/node_modules/@react-navigation/stack/lib/commonjs/utils/conditional.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/debounce.js b/node_modules/@react-navigation/stack/lib/commonjs/utils/debounce.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/debounce.js.map b/node_modules/@react-navigation/stack/lib/commonjs/utils/debounce.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/findLastIndex.js b/node_modules/@react-navigation/stack/lib/commonjs/utils/findLastIndex.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/findLastIndex.js.map b/node_modules/@react-navigation/stack/lib/commonjs/utils/findLastIndex.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/getDistanceForDirection.js b/node_modules/@react-navigation/stack/lib/commonjs/utils/getDistanceForDirection.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/getDistanceForDirection.js.map b/node_modules/@react-navigation/stack/lib/commonjs/utils/getDistanceForDirection.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/getInvertedMultiplier.js b/node_modules/@react-navigation/stack/lib/commonjs/utils/getInvertedMultiplier.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/getInvertedMultiplier.js.map b/node_modules/@react-navigation/stack/lib/commonjs/utils/getInvertedMultiplier.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/memoize.js b/node_modules/@react-navigation/stack/lib/commonjs/utils/memoize.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/memoize.js.map b/node_modules/@react-navigation/stack/lib/commonjs/utils/memoize.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/useCardAnimation.js b/node_modules/@react-navigation/stack/lib/commonjs/utils/useCardAnimation.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/useCardAnimation.js.map b/node_modules/@react-navigation/stack/lib/commonjs/utils/useCardAnimation.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/useGestureHandlerRef.js b/node_modules/@react-navigation/stack/lib/commonjs/utils/useGestureHandlerRef.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/useGestureHandlerRef.js.map b/node_modules/@react-navigation/stack/lib/commonjs/utils/useGestureHandlerRef.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/useKeyboardManager.js b/node_modules/@react-navigation/stack/lib/commonjs/utils/useKeyboardManager.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/utils/useKeyboardManager.js.map b/node_modules/@react-navigation/stack/lib/commonjs/utils/useKeyboardManager.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/GestureHandler.android.js b/node_modules/@react-navigation/stack/lib/commonjs/views/GestureHandler.android.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/GestureHandler.android.js.map b/node_modules/@react-navigation/stack/lib/commonjs/views/GestureHandler.android.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/GestureHandler.ios.js b/node_modules/@react-navigation/stack/lib/commonjs/views/GestureHandler.ios.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/GestureHandler.ios.js.map b/node_modules/@react-navigation/stack/lib/commonjs/views/GestureHandler.ios.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/GestureHandler.js b/node_modules/@react-navigation/stack/lib/commonjs/views/GestureHandler.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/GestureHandler.js.map b/node_modules/@react-navigation/stack/lib/commonjs/views/GestureHandler.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/GestureHandlerNative.js b/node_modules/@react-navigation/stack/lib/commonjs/views/GestureHandlerNative.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/GestureHandlerNative.js.map b/node_modules/@react-navigation/stack/lib/commonjs/views/GestureHandlerNative.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/Header/Header.js b/node_modules/@react-navigation/stack/lib/commonjs/views/Header/Header.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/Header/Header.js.map b/node_modules/@react-navigation/stack/lib/commonjs/views/Header/Header.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/Header/HeaderContainer.js b/node_modules/@react-navigation/stack/lib/commonjs/views/Header/HeaderContainer.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/Header/HeaderContainer.js.map b/node_modules/@react-navigation/stack/lib/commonjs/views/Header/HeaderContainer.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/Header/HeaderSegment.js b/node_modules/@react-navigation/stack/lib/commonjs/views/Header/HeaderSegment.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/Header/HeaderSegment.js.map b/node_modules/@react-navigation/stack/lib/commonjs/views/Header/HeaderSegment.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/ModalStatusBarManager.js b/node_modules/@react-navigation/stack/lib/commonjs/views/ModalStatusBarManager.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/ModalStatusBarManager.js.map b/node_modules/@react-navigation/stack/lib/commonjs/views/ModalStatusBarManager.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/Screens.js b/node_modules/@react-navigation/stack/lib/commonjs/views/Screens.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/Screens.js.map b/node_modules/@react-navigation/stack/lib/commonjs/views/Screens.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/Stack/Card.js b/node_modules/@react-navigation/stack/lib/commonjs/views/Stack/Card.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/Stack/Card.js.map b/node_modules/@react-navigation/stack/lib/commonjs/views/Stack/Card.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/Stack/CardContainer.js b/node_modules/@react-navigation/stack/lib/commonjs/views/Stack/CardContainer.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/Stack/CardContainer.js.map b/node_modules/@react-navigation/stack/lib/commonjs/views/Stack/CardContainer.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/Stack/CardSheet.js b/node_modules/@react-navigation/stack/lib/commonjs/views/Stack/CardSheet.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/Stack/CardSheet.js.map b/node_modules/@react-navigation/stack/lib/commonjs/views/Stack/CardSheet.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/Stack/CardStack.js b/node_modules/@react-navigation/stack/lib/commonjs/views/Stack/CardStack.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/Stack/CardStack.js.map b/node_modules/@react-navigation/stack/lib/commonjs/views/Stack/CardStack.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/Stack/StackView.js b/node_modules/@react-navigation/stack/lib/commonjs/views/Stack/StackView.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/commonjs/views/Stack/StackView.js.map b/node_modules/@react-navigation/stack/lib/commonjs/views/Stack/StackView.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/TransitionConfigs/CardStyleInterpolators.js b/node_modules/@react-navigation/stack/lib/module/TransitionConfigs/CardStyleInterpolators.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/TransitionConfigs/CardStyleInterpolators.js.map b/node_modules/@react-navigation/stack/lib/module/TransitionConfigs/CardStyleInterpolators.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/TransitionConfigs/HeaderStyleInterpolators.js b/node_modules/@react-navigation/stack/lib/module/TransitionConfigs/HeaderStyleInterpolators.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/TransitionConfigs/HeaderStyleInterpolators.js.map b/node_modules/@react-navigation/stack/lib/module/TransitionConfigs/HeaderStyleInterpolators.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/TransitionConfigs/TransitionPresets.js b/node_modules/@react-navigation/stack/lib/module/TransitionConfigs/TransitionPresets.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/TransitionConfigs/TransitionPresets.js.map b/node_modules/@react-navigation/stack/lib/module/TransitionConfigs/TransitionPresets.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/TransitionConfigs/TransitionSpecs.js b/node_modules/@react-navigation/stack/lib/module/TransitionConfigs/TransitionSpecs.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/TransitionConfigs/TransitionSpecs.js.map b/node_modules/@react-navigation/stack/lib/module/TransitionConfigs/TransitionSpecs.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/index.js b/node_modules/@react-navigation/stack/lib/module/index.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/index.js.map b/node_modules/@react-navigation/stack/lib/module/index.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/navigators/createStackNavigator.js b/node_modules/@react-navigation/stack/lib/module/navigators/createStackNavigator.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/navigators/createStackNavigator.js.map b/node_modules/@react-navigation/stack/lib/module/navigators/createStackNavigator.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/types.js b/node_modules/@react-navigation/stack/lib/module/types.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/types.js.map b/node_modules/@react-navigation/stack/lib/module/types.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/CardAnimationContext.js b/node_modules/@react-navigation/stack/lib/module/utils/CardAnimationContext.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/CardAnimationContext.js.map b/node_modules/@react-navigation/stack/lib/module/utils/CardAnimationContext.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/GestureHandlerRefContext.js b/node_modules/@react-navigation/stack/lib/module/utils/GestureHandlerRefContext.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/GestureHandlerRefContext.js.map b/node_modules/@react-navigation/stack/lib/module/utils/GestureHandlerRefContext.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/ModalPresentationContext.js b/node_modules/@react-navigation/stack/lib/module/utils/ModalPresentationContext.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/ModalPresentationContext.js.map b/node_modules/@react-navigation/stack/lib/module/utils/ModalPresentationContext.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/conditional.js b/node_modules/@react-navigation/stack/lib/module/utils/conditional.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/conditional.js.map b/node_modules/@react-navigation/stack/lib/module/utils/conditional.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/debounce.js b/node_modules/@react-navigation/stack/lib/module/utils/debounce.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/debounce.js.map b/node_modules/@react-navigation/stack/lib/module/utils/debounce.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/findLastIndex.js b/node_modules/@react-navigation/stack/lib/module/utils/findLastIndex.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/findLastIndex.js.map b/node_modules/@react-navigation/stack/lib/module/utils/findLastIndex.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/getDistanceForDirection.js b/node_modules/@react-navigation/stack/lib/module/utils/getDistanceForDirection.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/getDistanceForDirection.js.map b/node_modules/@react-navigation/stack/lib/module/utils/getDistanceForDirection.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/getInvertedMultiplier.js b/node_modules/@react-navigation/stack/lib/module/utils/getInvertedMultiplier.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/getInvertedMultiplier.js.map b/node_modules/@react-navigation/stack/lib/module/utils/getInvertedMultiplier.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/memoize.js b/node_modules/@react-navigation/stack/lib/module/utils/memoize.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/memoize.js.map b/node_modules/@react-navigation/stack/lib/module/utils/memoize.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/useCardAnimation.js b/node_modules/@react-navigation/stack/lib/module/utils/useCardAnimation.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/useCardAnimation.js.map b/node_modules/@react-navigation/stack/lib/module/utils/useCardAnimation.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/useGestureHandlerRef.js b/node_modules/@react-navigation/stack/lib/module/utils/useGestureHandlerRef.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/useGestureHandlerRef.js.map b/node_modules/@react-navigation/stack/lib/module/utils/useGestureHandlerRef.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/useKeyboardManager.js b/node_modules/@react-navigation/stack/lib/module/utils/useKeyboardManager.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/utils/useKeyboardManager.js.map b/node_modules/@react-navigation/stack/lib/module/utils/useKeyboardManager.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/GestureHandler.android.js b/node_modules/@react-navigation/stack/lib/module/views/GestureHandler.android.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/GestureHandler.android.js.map b/node_modules/@react-navigation/stack/lib/module/views/GestureHandler.android.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/GestureHandler.ios.js b/node_modules/@react-navigation/stack/lib/module/views/GestureHandler.ios.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/GestureHandler.ios.js.map b/node_modules/@react-navigation/stack/lib/module/views/GestureHandler.ios.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/GestureHandler.js b/node_modules/@react-navigation/stack/lib/module/views/GestureHandler.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/GestureHandler.js.map b/node_modules/@react-navigation/stack/lib/module/views/GestureHandler.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/GestureHandlerNative.js b/node_modules/@react-navigation/stack/lib/module/views/GestureHandlerNative.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/GestureHandlerNative.js.map b/node_modules/@react-navigation/stack/lib/module/views/GestureHandlerNative.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/Header/Header.js b/node_modules/@react-navigation/stack/lib/module/views/Header/Header.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/Header/Header.js.map b/node_modules/@react-navigation/stack/lib/module/views/Header/Header.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/Header/HeaderContainer.js b/node_modules/@react-navigation/stack/lib/module/views/Header/HeaderContainer.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/Header/HeaderContainer.js.map b/node_modules/@react-navigation/stack/lib/module/views/Header/HeaderContainer.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/Header/HeaderSegment.js b/node_modules/@react-navigation/stack/lib/module/views/Header/HeaderSegment.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/Header/HeaderSegment.js.map b/node_modules/@react-navigation/stack/lib/module/views/Header/HeaderSegment.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/ModalStatusBarManager.js b/node_modules/@react-navigation/stack/lib/module/views/ModalStatusBarManager.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/ModalStatusBarManager.js.map b/node_modules/@react-navigation/stack/lib/module/views/ModalStatusBarManager.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/Screens.js b/node_modules/@react-navigation/stack/lib/module/views/Screens.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/Screens.js.map b/node_modules/@react-navigation/stack/lib/module/views/Screens.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/Stack/Card.js b/node_modules/@react-navigation/stack/lib/module/views/Stack/Card.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/Stack/Card.js.map b/node_modules/@react-navigation/stack/lib/module/views/Stack/Card.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/Stack/CardContainer.js b/node_modules/@react-navigation/stack/lib/module/views/Stack/CardContainer.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/Stack/CardContainer.js.map b/node_modules/@react-navigation/stack/lib/module/views/Stack/CardContainer.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/Stack/CardSheet.js b/node_modules/@react-navigation/stack/lib/module/views/Stack/CardSheet.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/Stack/CardSheet.js.map b/node_modules/@react-navigation/stack/lib/module/views/Stack/CardSheet.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/Stack/CardStack.js b/node_modules/@react-navigation/stack/lib/module/views/Stack/CardStack.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/Stack/CardStack.js.map b/node_modules/@react-navigation/stack/lib/module/views/Stack/CardStack.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/Stack/StackView.js b/node_modules/@react-navigation/stack/lib/module/views/Stack/StackView.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/module/views/Stack/StackView.js.map b/node_modules/@react-navigation/stack/lib/module/views/Stack/StackView.js.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/TransitionConfigs/CardStyleInterpolators.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/TransitionConfigs/CardStyleInterpolators.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/TransitionConfigs/CardStyleInterpolators.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/TransitionConfigs/CardStyleInterpolators.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/TransitionConfigs/HeaderStyleInterpolators.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/TransitionConfigs/HeaderStyleInterpolators.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/TransitionConfigs/HeaderStyleInterpolators.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/TransitionConfigs/HeaderStyleInterpolators.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/TransitionConfigs/TransitionPresets.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/TransitionConfigs/TransitionPresets.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/TransitionConfigs/TransitionPresets.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/TransitionConfigs/TransitionPresets.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/TransitionConfigs/TransitionSpecs.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/TransitionConfigs/TransitionSpecs.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/TransitionConfigs/TransitionSpecs.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/TransitionConfigs/TransitionSpecs.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/index.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/index.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/index.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/index.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/navigators/createStackNavigator.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/navigators/createStackNavigator.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/navigators/createStackNavigator.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/navigators/createStackNavigator.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/types.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/types.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/types.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/types.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/CardAnimationContext.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/utils/CardAnimationContext.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/CardAnimationContext.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/utils/CardAnimationContext.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/GestureHandlerRefContext.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/utils/GestureHandlerRefContext.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/GestureHandlerRefContext.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/utils/GestureHandlerRefContext.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/ModalPresentationContext.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/utils/ModalPresentationContext.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/ModalPresentationContext.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/utils/ModalPresentationContext.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/conditional.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/utils/conditional.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/conditional.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/utils/conditional.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/debounce.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/utils/debounce.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/debounce.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/utils/debounce.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/findLastIndex.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/utils/findLastIndex.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/findLastIndex.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/utils/findLastIndex.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/getDistanceForDirection.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/utils/getDistanceForDirection.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/getDistanceForDirection.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/utils/getDistanceForDirection.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/getInvertedMultiplier.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/utils/getInvertedMultiplier.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/getInvertedMultiplier.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/utils/getInvertedMultiplier.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/memoize.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/utils/memoize.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/memoize.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/utils/memoize.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/useCardAnimation.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/utils/useCardAnimation.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/useCardAnimation.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/utils/useCardAnimation.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/useGestureHandlerRef.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/utils/useGestureHandlerRef.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/useGestureHandlerRef.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/utils/useGestureHandlerRef.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/useKeyboardManager.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/utils/useKeyboardManager.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/utils/useKeyboardManager.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/utils/useKeyboardManager.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/GestureHandler.android.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/views/GestureHandler.android.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/GestureHandler.android.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/views/GestureHandler.android.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/GestureHandler.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/views/GestureHandler.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/GestureHandler.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/views/GestureHandler.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/GestureHandler.ios.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/views/GestureHandler.ios.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/GestureHandler.ios.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/views/GestureHandler.ios.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/GestureHandlerNative.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/views/GestureHandlerNative.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/GestureHandlerNative.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/views/GestureHandlerNative.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/Header/Header.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/views/Header/Header.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/Header/Header.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/views/Header/Header.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/Header/HeaderContainer.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/views/Header/HeaderContainer.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/Header/HeaderContainer.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/views/Header/HeaderContainer.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/Header/HeaderSegment.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/views/Header/HeaderSegment.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/Header/HeaderSegment.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/views/Header/HeaderSegment.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/ModalStatusBarManager.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/views/ModalStatusBarManager.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/ModalStatusBarManager.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/views/ModalStatusBarManager.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/Screens.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/views/Screens.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/Screens.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/views/Screens.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/Stack/Card.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/views/Stack/Card.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/Stack/Card.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/views/Stack/Card.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/Stack/CardContainer.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/views/Stack/CardContainer.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/Stack/CardContainer.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/views/Stack/CardContainer.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/Stack/CardSheet.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/views/Stack/CardSheet.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/Stack/CardSheet.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/views/Stack/CardSheet.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/Stack/CardStack.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/views/Stack/CardStack.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/Stack/CardStack.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/views/Stack/CardStack.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/Stack/StackView.d.ts b/node_modules/@react-navigation/stack/lib/typescript/src/views/Stack/StackView.d.ts
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/lib/typescript/src/views/Stack/StackView.d.ts.map b/node_modules/@react-navigation/stack/lib/typescript/src/views/Stack/StackView.d.ts.map
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/TransitionConfigs/CardStyleInterpolators.tsx b/node_modules/@react-navigation/stack/src/TransitionConfigs/CardStyleInterpolators.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/TransitionConfigs/HeaderStyleInterpolators.tsx b/node_modules/@react-navigation/stack/src/TransitionConfigs/HeaderStyleInterpolators.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/TransitionConfigs/TransitionPresets.tsx b/node_modules/@react-navigation/stack/src/TransitionConfigs/TransitionPresets.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/TransitionConfigs/TransitionSpecs.tsx b/node_modules/@react-navigation/stack/src/TransitionConfigs/TransitionSpecs.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/index.tsx b/node_modules/@react-navigation/stack/src/index.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/navigators/createStackNavigator.tsx b/node_modules/@react-navigation/stack/src/navigators/createStackNavigator.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/types.tsx b/node_modules/@react-navigation/stack/src/types.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/utils/CardAnimationContext.tsx b/node_modules/@react-navigation/stack/src/utils/CardAnimationContext.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/utils/GestureHandlerRefContext.tsx b/node_modules/@react-navigation/stack/src/utils/GestureHandlerRefContext.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/utils/ModalPresentationContext.tsx b/node_modules/@react-navigation/stack/src/utils/ModalPresentationContext.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/utils/conditional.tsx b/node_modules/@react-navigation/stack/src/utils/conditional.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/utils/debounce.tsx b/node_modules/@react-navigation/stack/src/utils/debounce.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/utils/findLastIndex.tsx b/node_modules/@react-navigation/stack/src/utils/findLastIndex.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/utils/getDistanceForDirection.tsx b/node_modules/@react-navigation/stack/src/utils/getDistanceForDirection.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/utils/getInvertedMultiplier.tsx b/node_modules/@react-navigation/stack/src/utils/getInvertedMultiplier.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/utils/memoize.tsx b/node_modules/@react-navigation/stack/src/utils/memoize.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/utils/useCardAnimation.tsx b/node_modules/@react-navigation/stack/src/utils/useCardAnimation.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/utils/useGestureHandlerRef.tsx b/node_modules/@react-navigation/stack/src/utils/useGestureHandlerRef.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/utils/useKeyboardManager.tsx b/node_modules/@react-navigation/stack/src/utils/useKeyboardManager.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/views/GestureHandler.android.tsx b/node_modules/@react-navigation/stack/src/views/GestureHandler.android.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/views/GestureHandler.ios.tsx b/node_modules/@react-navigation/stack/src/views/GestureHandler.ios.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/views/GestureHandler.tsx b/node_modules/@react-navigation/stack/src/views/GestureHandler.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/views/GestureHandlerNative.tsx b/node_modules/@react-navigation/stack/src/views/GestureHandlerNative.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/views/Header/Header.tsx b/node_modules/@react-navigation/stack/src/views/Header/Header.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/views/Header/HeaderContainer.tsx b/node_modules/@react-navigation/stack/src/views/Header/HeaderContainer.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/views/Header/HeaderSegment.tsx b/node_modules/@react-navigation/stack/src/views/Header/HeaderSegment.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/views/ModalStatusBarManager.tsx b/node_modules/@react-navigation/stack/src/views/ModalStatusBarManager.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/views/Screens.tsx b/node_modules/@react-navigation/stack/src/views/Screens.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/views/Stack/Card.tsx b/node_modules/@react-navigation/stack/src/views/Stack/Card.tsx
+index 64a551e..fd064c3 100755
+--- a/node_modules/@react-navigation/stack/src/views/Stack/Card.tsx
++++ b/node_modules/@react-navigation/stack/src/views/Stack/Card.tsx
+@@ -1,5 +1,5 @@
+-import Color from 'color';
+-import * as React from 'react';
++import Color from "color";
++import * as React from "react";
+ import {
+   Animated,
+   InteractionManager,
+@@ -9,28 +9,28 @@ import {
+   View,
+   ViewProps,
+   ViewStyle,
+-} from 'react-native';
+-import type { EdgeInsets } from 'react-native-safe-area-context';
++} from "react-native";
++import type { EdgeInsets } from "react-native-safe-area-context";
+ 
+-import { forModalPresentationIOS } from '../../TransitionConfigs/CardStyleInterpolators';
++import { forModalPresentationIOS } from "../../TransitionConfigs/CardStyleInterpolators";
+ import type {
+   GestureDirection,
+   Layout,
+   StackCardInterpolationProps,
+   StackCardStyleInterpolator,
+   TransitionSpec,
+-} from '../../types';
+-import CardAnimationContext from '../../utils/CardAnimationContext';
+-import getDistanceForDirection from '../../utils/getDistanceForDirection';
+-import getInvertedMultiplier from '../../utils/getInvertedMultiplier';
+-import memoize from '../../utils/memoize';
++} from "../../types";
++import CardAnimationContext from "../../utils/CardAnimationContext";
++import getDistanceForDirection from "../../utils/getDistanceForDirection";
++import getInvertedMultiplier from "../../utils/getInvertedMultiplier";
++import memoize from "../../utils/memoize";
+ import {
+   GestureState,
+   PanGestureHandler,
+   PanGestureHandlerGestureEvent,
+-} from '../GestureHandler';
+-import ModalStatusBarManager from '../ModalStatusBarManager';
+-import CardSheet, { CardSheetRef } from './CardSheet';
++} from "../GestureHandler";
++import ModalStatusBarManager from "../ModalStatusBarManager";
++import CardSheet, { CardSheetRef } from "./CardSheet";
+ 
+ type Props = ViewProps & {
+   interpolationIndex: number;
+@@ -78,7 +78,7 @@ const FALSE = 0;
+ const GESTURE_RESPONSE_DISTANCE_HORIZONTAL = 50;
+ const GESTURE_RESPONSE_DISTANCE_VERTICAL = 135;
+ 
+-const useNativeDriver = Platform.OS !== 'web';
++const useNativeDriver = Platform.OS !== "web";
+ 
+ const hasOpacityStyle = (style: any) => {
+   if (style) {
+@@ -107,6 +107,9 @@ export default class Card extends React.Component<Props> {
+   componentDidMount() {
+     this.animate({ closing: this.props.closing });
+     this.isCurrentlyMounted = true;
++    this.props.gesture.addListener(() => {
++      return;
++    });
+   }
+ 
+   componentDidUpdate(prevProps: Props) {
+@@ -144,6 +147,7 @@ export default class Card extends React.Component<Props> {
+     this.props.gesture.stopAnimation();
+     this.isCurrentlyMounted = false;
+     this.handleEndInteraction();
++    this.props.gesture.removeAllListeners();
+   }
+ 
+   private isCurrentlyMounted = false;
+@@ -189,7 +193,7 @@ export default class Card extends React.Component<Props> {
+     const spec = closing ? transitionSpec.close : transitionSpec.open;
+ 
+     const animation =
+-      spec.animation === 'spring' ? Animated.spring : Animated.timing;
++      spec.animation === "spring" ? Animated.spring : Animated.timing;
+ 
+     this.setPointerEventsEnabled(!closing);
+     this.handleStartInteraction();
+@@ -240,7 +244,7 @@ export default class Card extends React.Component<Props> {
+   };
+ 
+   private setPointerEventsEnabled = (enabled: boolean) => {
+-    const pointerEvents = enabled ? 'box-none' : 'none';
++    const pointerEvents = enabled ? "box-none" : "none";
+ 
+     this.ref.current?.setPointerEvents(pointerEvents);
+   };
+@@ -282,8 +286,8 @@ export default class Card extends React.Component<Props> {
+         this.handleEndInteraction();
+ 
+         const velocity =
+-          gestureDirection === 'vertical' ||
+-          gestureDirection === 'vertical-inverted'
++          gestureDirection === "vertical" ||
++          gestureDirection === "vertical-inverted"
+             ? nativeEvent.velocityY
+             : nativeEvent.velocityX;
+ 
+@@ -300,8 +304,8 @@ export default class Card extends React.Component<Props> {
+         let velocity;
+ 
+         if (
+-          gestureDirection === 'vertical' ||
+-          gestureDirection === 'vertical-inverted'
++          gestureDirection === "vertical" ||
++          gestureDirection === "vertical-inverted"
+         ) {
+           distance = layout.height;
+           translation = nativeEvent.translationY;
+@@ -384,19 +388,19 @@ export default class Card extends React.Component<Props> {
+     const distance =
+       gestureResponseDistance !== undefined
+         ? gestureResponseDistance
+-        : gestureDirection === 'vertical' ||
+-          gestureDirection === 'vertical-inverted'
++        : gestureDirection === "vertical" ||
++          gestureDirection === "vertical-inverted"
+         ? GESTURE_RESPONSE_DISTANCE_VERTICAL
+         : GESTURE_RESPONSE_DISTANCE_HORIZONTAL;
+ 
+-    if (gestureDirection === 'vertical') {
++    if (gestureDirection === "vertical") {
+       return {
+         maxDeltaX: 15,
+         minOffsetY: 5,
+         hitSlop: { bottom: -layout.height + distance },
+         enableTrackpadTwoFingerGesture,
+       };
+-    } else if (gestureDirection === 'vertical-inverted') {
++    } else if (gestureDirection === "vertical-inverted") {
+       return {
+         maxDeltaX: 15,
+         minOffsetY: -5,
+@@ -473,8 +477,8 @@ export default class Card extends React.Component<Props> {
+           [
+             {
+               nativeEvent:
+-                gestureDirection === 'vertical' ||
+-                gestureDirection === 'vertical-inverted'
++                gestureDirection === "vertical" ||
++                gestureDirection === "vertical-inverted"
+                   ? { translationY: gesture }
+                   : { translationX: gesture },
+             },
+@@ -485,7 +489,7 @@ export default class Card extends React.Component<Props> {
+ 
+     const { backgroundColor } = StyleSheet.flatten(contentStyle || {});
+     const isTransparent =
+-      typeof backgroundColor === 'string'
++      typeof backgroundColor === "string"
+         ? Color(backgroundColor).alpha() === 0
+         : false;
+ 
+@@ -494,7 +498,7 @@ export default class Card extends React.Component<Props> {
+         {
+           // StatusBar messes with translucent status bar on Android
+           // So we should only enable it on iOS
+-          Platform.OS === 'ios' &&
++          Platform.OS === "ios" &&
+           overlayEnabled &&
+           next &&
+           getIsModalPresentation(styleInterpolator) ? (
+@@ -541,11 +545,11 @@ export default class Card extends React.Component<Props> {
+                   <Animated.View
+                     style={[
+                       styles.shadow,
+-                      gestureDirection === 'horizontal'
++                      gestureDirection === "horizontal"
+                         ? [styles.shadowHorizontal, styles.shadowLeft]
+-                        : gestureDirection === 'horizontal-inverted'
++                        : gestureDirection === "horizontal-inverted"
+                         ? [styles.shadowHorizontal, styles.shadowRight]
+-                        : gestureDirection === 'vertical'
++                        : gestureDirection === "vertical"
+                         ? [styles.shadowVertical, styles.shadowTop]
+                         : [styles.shadowVertical, styles.shadowBottom],
+                       { backgroundColor },
+@@ -577,7 +581,7 @@ export const getIsModalPresentation = (
+   return (
+     cardStyleInterpolator === forModalPresentationIOS ||
+     // Handle custom modal presentation interpolators as well
+-    cardStyleInterpolator.name === 'forModalPresentationIOS'
++    cardStyleInterpolator.name === "forModalPresentationIOS"
+   );
+ };
+ 
+@@ -587,12 +591,12 @@ const styles = StyleSheet.create({
+   },
+   overlay: {
+     flex: 1,
+-    backgroundColor: '#000',
++    backgroundColor: "#000",
+   },
+   shadow: {
+-    position: 'absolute',
++    position: "absolute",
+     shadowRadius: 5,
+-    shadowColor: '#000',
++    shadowColor: "#000",
+     shadowOpacity: 0.3,
+   },
+   shadowHorizontal: {
+diff --git a/node_modules/@react-navigation/stack/src/views/Stack/CardContainer.tsx b/node_modules/@react-navigation/stack/src/views/Stack/CardContainer.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/views/Stack/CardSheet.tsx b/node_modules/@react-navigation/stack/src/views/Stack/CardSheet.tsx
+old mode 100644
+new mode 100755
+diff --git a/node_modules/@react-navigation/stack/src/views/Stack/StackView.tsx b/node_modules/@react-navigation/stack/src/views/Stack/StackView.tsx
+old mode 100644
+new mode 100755
