@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Image, ActivityIndicator } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Image,
+  ActivityIndicator,
+  Dimensions,
+} from "react-native";
 
 export default function Banner() {
   const [imageUrl, setImageUrl] = useState(null);
-  const [isLoading, setIsLoading] = useState(true); // Add a loading state
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetch(
@@ -15,11 +21,11 @@ export default function Banner() {
         if (bannerUrl) {
           setImageUrl({ uri: bannerUrl });
         }
-        setIsLoading(false); // Set loading to false after fetching data
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching image URL:", error);
-        setIsLoading(false); // Also set loading to false in case of error
+        setIsLoading(false);
       });
   }, []);
 
@@ -28,7 +34,15 @@ export default function Banner() {
       {isLoading ? (
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (
-        imageUrl && <Image source={imageUrl} style={styles.banner} />
+        imageUrl && (
+          <View style={styles.imageContainer}>
+            <Image
+              source={imageUrl}
+              style={styles.banner}
+              resizeMode="contain"
+            />
+          </View>
+        )
       )}
     </View>
   );
@@ -36,15 +50,16 @@ export default function Banner() {
 
 const styles = StyleSheet.create({
   bannerContainer: {
-    backgroundColor: "blue",
-    width: "100%",
-    height: 400,
+    backgroundColor: "grey",
     justifyContent: "center",
     alignItems: "center",
+  },
+  imageContainer: {
+    width: "100%",
+    aspectRatio: 1,
   },
   banner: {
     width: "100%",
     height: "100%",
-    resizeMode: "cover",
   },
 });

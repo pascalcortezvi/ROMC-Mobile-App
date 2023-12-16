@@ -1,14 +1,20 @@
 import React from "react";
-import { View, StyleSheet, TextInput } from "react-native";
+import { View, StyleSheet, TextInput, Image } from "react-native";
 
-export default function Header() {
+export default function Header({ onSearch }) {
   return (
     <View style={styles.header}>
+      <Image
+        source={require("../assets/logo.webp")}
+        style={styles.logo}
+        resizeMode="contain"
+      />
       <TextInput
         placeholderTextColor="white"
-        placeholder="Search musicredone.com"
+        placeholder="Search products..."
         style={styles.searchBar}
         selectionColor="white"
+        onChangeText={onSearch}
       />
     </View>
   );
@@ -16,17 +22,21 @@ export default function Header() {
 
 const styles = StyleSheet.create({
   header: {
-    height: 100,
-    backgroundColor: "black",
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 20,
+    backgroundColor: "#131313",
+    padding: 15,
+  },
+  logo: {
+    width: 100,
+    height: 60,
+    marginRight: 20,
   },
   searchBar: {
+    flex: 1,
     height: 50,
-    backgroundColor: "#646464",
+    backgroundColor: "#505050",
     borderRadius: 10,
-    width: "100%",
     paddingHorizontal: 15,
     fontSize: 16,
     color: "white",

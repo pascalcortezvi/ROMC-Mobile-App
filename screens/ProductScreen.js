@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   addToCartButton: {
-    backgroundColor: "black",
+    backgroundColor: "#131313",
     padding: 30,
     textAlign: "center",
     borderRadius: 10,
