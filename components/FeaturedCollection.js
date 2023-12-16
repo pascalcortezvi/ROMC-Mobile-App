@@ -120,12 +120,13 @@ const styles = StyleSheet.create({
     width: 220,
   },
   productImageContainer: {
-    display: "flex",
-    alignItems: "center",
+    height: 150,
+    padding: 10,
   },
   productImage: {
-    width: 150,
-    height: 150,
+    width: "100%",
+    height: "100%",
+    resizeMode: "contain",
   },
   productPrice: {
     marginTop: 10,

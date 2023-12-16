@@ -9,7 +9,7 @@ export default function HomeScreen({ navigation }) {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    setRefreshTrigger((prev) => prev + 1); // Increment to trigger refresh
+    setRefreshTrigger((prev) => prev + 1);
     setRefreshing(false);
   }, []);
 

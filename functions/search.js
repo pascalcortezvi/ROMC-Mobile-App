@@ -9,17 +9,44 @@ const search = functions.https.onRequest((request, response) => {
     const searchQuery = request.query.q;
 
     const graphqlQuery = JSON.stringify({
-      query: `{
-        products(first: 6, query: "${searchQuery}") {
-          edges {
-            node {
-              id
+      query: `
+        query MyQuery($searchQuery: String!) {
+          products(first: 18, query: $searchQuery) {
+            nodes {
               title
               productType
+              images(first: 1) {
+                edges {
+                  node {
+                    url
+                  }
+                }
+              }
+              priceRange {
+                minVariantPrice {
+                  amount
+                }
+              }
+              compareAtPriceRange {
+                minVariantPrice {
+                  amount
+                }
+              }
+              id
+              collections(first: 50) {
+                edges {
+                  node {
+                    id
+                  }
+                }
+              }
             }
           }
         }
-      }`,
+      `,
+      variables: {
+        searchQuery: searchQuery,
+      },
     });
 
     try {
@@ -36,7 +63,7 @@ const search = functions.https.onRequest((request, response) => {
       );
 
       const jsonResponse = await shopifyResponse.json();
-      response.send(jsonResponse.data.products.edges.map(edge => edge.node));
+      response.send(jsonResponse.data.products.nodes);
     } catch (error) {
       console.error("Error:", error);
       response.status(500).send("Server error");
