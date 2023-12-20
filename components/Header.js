@@ -184,7 +184,10 @@ const Header = ({ isDropdownVisible, setDropdownVisible }) => {
         // Check if it's numeric before navigating
         if (!isNaN(numericProductId)) {
           console.log("Navigating to Product with ID: ", numericProductId);
-          navigation.navigate("Product", { productId: numericProductId });
+          navigation.navigate("Product", {
+            productId: numericProductId,
+            key: new Date().getTime(),
+          });
         } else {
           console.log("Invalid product ID:", numericProductId);
         }

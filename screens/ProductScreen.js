@@ -12,7 +12,7 @@ import {
 import HTMLView from "react-native-htmlview";
 
 export default function ProductScreen({ route, navigation }) {
-  const { productId } = route.params;
+  const { productId, key } = route.params;
   const [productData, setProductData] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -31,7 +31,7 @@ export default function ProductScreen({ route, navigation }) {
       .catch((error) => {
         console.error("Error fetching data: ", error);
       });
-  }, [productId]);
+  }, [productId, key]);
 
   return (
     <ScrollView style={styles.container}>
