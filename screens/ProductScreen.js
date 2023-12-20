@@ -67,9 +67,9 @@ export default function ProductScreen({ route, navigation }) {
 
           <Text style={styles.price}>
             {`${parseFloat(
-              productData.priceRange.minVariantPrice.amount
+              productData.priceRangeV2.minVariantPrice.amount
             ).toFixed(2)} ${
-              productData.priceRange.minVariantPrice.currencyCode
+              productData.priceRangeV2.minVariantPrice.currencyCode
             }`}
           </Text>
 

@@ -26,7 +26,7 @@ const productDetails = functions.https.onRequest((request, response) => {
               url
             }
           }
-          priceRange {
+          priceRangeV2 {
             minVariantPrice {
               amount
               currencyCode
