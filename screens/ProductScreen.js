@@ -75,6 +75,10 @@ export default function ProductScreen({ route, navigation }) {
 
           <Text style={styles.title}>{productData.title}</Text>
 
+          <Text style={styles.inventory}>
+            Total Inventory: {productData.totalInventory}
+          </Text>
+
           <View style={styles.addToCartButton}>
             <Pressable>
               <Text style={styles.addToCartText}>Add to cart</Text>
@@ -150,6 +154,7 @@ const styles = StyleSheet.create({
     padding: 30,
     textAlign: "center",
     borderRadius: 10,
+    marginTop: 20,
   },
   addToCartText: {
     color: "white",
@@ -162,5 +167,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 40,
     marginBottom: 10,
+  },
+  inventory: {
+    backgroundColor: "#B5B5B5",
+    textAlign: "center",
+    padding: 20,
+    fontSize: 20,
+    fontWeight: "bold",
   },
 });

@@ -7,12 +7,19 @@ import {
   ScrollView,
   Text,
   TouchableOpacity,
+  Modal,
 } from "react-native";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
+import { BarCodeScanner } from "expo-barcode-scanner";
+import { useNavigation } from "@react-navigation/native";
 
 const Header = ({ isDropdownVisible, setDropdownVisible }) => {
+  const navigation = useNavigation();
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [hasPermission, setHasPermission] = useState(null);
+  const [scanned, setScanned] = useState(false);
+  const [isScannerVisible, setIsScannerVisible] = useState(false);
 
   const isInStockCollection = (collections, targetCollectionId) => {
     // Check if collections is an array and has elements
@@ -136,6 +143,59 @@ const Header = ({ isDropdownVisible, setDropdownVisible }) => {
     setDropdownVisible(false);
   };
 
+  const handleScanIconPress = async () => {
+    // If permission is already granted, just open the scanner
+    if (hasPermission) {
+      setIsScannerVisible(true);
+      setScanned(false);
+      return;
+    }
+
+    // If permission status is unknown (null), request it
+    if (hasPermission === null) {
+      const { status } = await BarCodeScanner.requestPermissionsAsync();
+      const isGranted = status === "granted";
+      setHasPermission(isGranted);
+      if (isGranted) {
+        setIsScannerVisible(true);
+        setScanned(false);
+      }
+    }
+  };
+
+  const handleBarCodeScanned = async ({ type, data: upc }) => {
+    setScanned(true);
+    setIsScannerVisible(false);
+
+    console.log("Scanned UPC: ", upc); // Log the scanned UPC code
+
+    try {
+      const response = await fetch(
+        `https://us-central1-romc-mobile-app.cloudfunctions.net/scan-scan?upc=${upc}`
+      );
+      const data = await response.json();
+      console.log("Response from scan-scan function: ", data); // Log the response
+
+      const { productId } = data;
+      if (productId) {
+        // Extract the numeric part of the productId
+        const numericProductId = productId.split("/").pop();
+
+        // Check if it's numeric before navigating
+        if (!isNaN(numericProductId)) {
+          console.log("Navigating to Product with ID: ", numericProductId);
+          navigation.navigate("Product", { productId: numericProductId });
+        } else {
+          console.log("Invalid product ID:", numericProductId);
+        }
+      } else {
+        console.log("Product not found for UPC:", upc);
+      }
+    } catch (error) {
+      console.error("Error fetching product ID:", error);
+    }
+  };
+
   return (
     <View style={styles.header}>
       <Image
@@ -143,14 +203,40 @@ const Header = ({ isDropdownVisible, setDropdownVisible }) => {
         style={styles.logo}
         resizeMode="contain"
       />
-      <TextInput
-        placeholderTextColor="white"
-        placeholder="Search products..."
-        style={styles.searchBar}
-        selectionColor="white"
-        onChangeText={setSearchQuery}
-        value={searchQuery}
-      />
+      <View style={styles.searchContainer}>
+        <TextInput
+          placeholderTextColor="white"
+          placeholder="Search products..."
+          style={styles.searchBar}
+          selectionColor="white"
+          onChangeText={setSearchQuery}
+          value={searchQuery}
+        />
+        <TouchableOpacity style={styles.scanIcon} onPress={handleScanIconPress}>
+          <FontAwesomeIcon name="barcode" size={24} color="white" />
+        </TouchableOpacity>
+      </View>
+      <Modal
+        visible={isScannerVisible}
+        onRequestClose={() => setIsScannerVisible(false)}
+        transparent={true}
+      >
+        <BarCodeScanner
+          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+          style={StyleSheet.absoluteFillObject}
+        >
+          <View style={styles.cameraContainer}>
+            <View style={styles.scanFrame} />
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={() => setIsScannerVisible(false)}
+            >
+              <Text style={styles.closeButtonText}>X</Text>
+            </TouchableOpacity>
+          </View>
+        </BarCodeScanner>
+      </Modal>
+
       {isDropdownVisible && (
         <View style={styles.dropdown}>
           <ScrollView contentContainerStyle={styles.gridContainer}>
@@ -181,15 +267,20 @@ const styles = StyleSheet.create({
     height: 60,
     marginRight: 20,
   },
-  searchBar: {
+  searchContainer: {
     flex: 1,
-    height: 50,
+    flexDirection: "row",
+    alignItems: "center",
     backgroundColor: "#505050",
     borderRadius: 10,
     paddingHorizontal: 15,
+    borderWidth: 1,
+  },
+  searchBar: {
+    flex: 1,
+    height: 50,
     fontSize: 16,
     color: "white",
-    borderWidth: 1,
   },
   dropdown: {
     position: "absolute",
@@ -320,6 +411,45 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     fontWeight: "bold",
     color: "#071B0F",
+  },
+  cameraContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  scanFrame: {
+    width: 250,
+    height: 150,
+    borderWidth: 2,
+    borderColor: "white",
+    opacity: 0.5,
+    backgroundColor: "transparent",
+  },
+  closeButton: {
+    position: "absolute",
+    bottom: 100,
+    right: 40,
+    backgroundColor: "white",
+    width: 50,
+    height: 50,
+    opacity: 0.5,
+    borderRadius: 25,
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 2,
+    elevation: 2,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  closeButtonText: {
+    color: "#131313",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  scanIcon: {
+    marginLeft: 10,
   },
 });
 

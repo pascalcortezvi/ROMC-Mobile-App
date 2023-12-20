@@ -115,11 +115,6 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header
-        isDropdownVisible={isDropdownVisible}
-        setDropdownVisible={setDropdownVisible}
-      />
-
       <View style={styles.mainContent}>
         {isDropdownVisible && (
           <TouchableOpacity
@@ -129,6 +124,10 @@ export default function App() {
           />
         )}
         <NavigationContainer>
+          <Header
+            isDropdownVisible={isDropdownVisible}
+            setDropdownVisible={setDropdownVisible}
+          />
           <MainTabNavigator />
         </NavigationContainer>
       </View>

@@ -5,7 +5,7 @@ const cors = require("cors")({ origin: true });
 const search = functions.https.onRequest((request, response) => {
   cors(request, response, async () => {
     const shopifyDomain = "musique-red-one-music.myshopify.com";
-    const storefrontAccessToken = "d9a30de63933c02111f631e6d17f9f07";
+    const storefrontAccessToken = "ff22e43cfa2c734aea496f1307b9370b";
     const searchQuery = request.query.q;
 
     const graphqlQuery = JSON.stringify({
