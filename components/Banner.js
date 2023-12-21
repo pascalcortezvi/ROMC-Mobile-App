@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  StyleSheet,
-  Image,
-  ActivityIndicator,
-  Dimensions,
-} from "react-native";
+import { View, StyleSheet, Image, ActivityIndicator } from "react-native";
 
 export default function Banner() {
   const [imageUrl, setImageUrl] = useState(null);

@@ -1,5 +1,12 @@
-import React, { useState } from "react";
-import { SafeAreaView, StyleSheet, View, TouchableOpacity } from "react-native"; // Ensure View is imported here
+import React, { useState, useEffect } from "react";
+import {
+  SafeAreaView,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Text,
+  Image,
+} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -106,8 +113,30 @@ function MainTabNavigator() {
   );
 }
 
+function SplashScreen() {
+  return (
+    <View style={styles.splashScreenContainer}>
+      <Image
+        source={require("./assets/logo.webp")}
+        style={styles.logo}
+        resizeMode="contain"
+      />
+    </View>
+  );
+}
+
 export default function App() {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    // Hide the splash screen after 3 seconds
+    const timer = setTimeout(() => {
+      setShowSplash(false);
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleOverlayPress = () => {
     setDropdownVisible(false);
@@ -130,6 +159,11 @@ export default function App() {
           />
           <MainTabNavigator />
         </NavigationContainer>
+        {showSplash && (
+          <View style={styles.splashScreenOverlay}>
+            <SplashScreen />
+          </View>
+        )}
       </View>
     </SafeAreaView>
   );
@@ -146,9 +180,30 @@ const styles = StyleSheet.create({
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
-    zIndex: 1, // Ensure this is above main content but below the header
+    zIndex: 1,
   },
   tabBar: {
     backgroundColor: "#131313",
+  },
+  splashScreenContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  splashScreenOverlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#131313",
+    zIndex: 10,
+  },
+  logo: {
+    width: 200,
+    height: 200,
+    // ...[other styles]
   },
 });
