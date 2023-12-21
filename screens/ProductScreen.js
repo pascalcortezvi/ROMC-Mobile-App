@@ -23,6 +23,7 @@ export default function ProductScreen({ route, navigation }) {
       .then((response) => response.json())
       .then((data) => {
         const product = data.data.product;
+        console.log(data);
         setProductData(product);
         if (product.images.nodes.length > 0) {
           setSelectedImage(product.images.nodes[0].url);
@@ -33,11 +34,33 @@ export default function ProductScreen({ route, navigation }) {
       });
   }, [productId, key]);
 
+  const renderInventoryLocation = (inventoryLevels) => {
+    return inventoryLevels.edges.map((edge, index) => {
+      const locationName = edge.node.location.name;
+      const quantity = edge.node.quantities[0].quantity;
+
+      return (
+        <View key={index} style={styles.detailRow}>
+          <Text style={styles.detailLabel}>{locationName}:</Text>
+          <Text style={styles.detailValue}>{quantity}</Text>
+        </View>
+      );
+    });
+  };
+
+  const renderDetail = (label, value) => {
+    return (
+      <View style={styles.detailRow}>
+        <Text style={styles.detailLabel}>{label}:</Text>
+        <Text style={styles.detailValue}>{value}</Text>
+      </View>
+    );
+  };
+
   return (
     <ScrollView style={styles.container}>
       {productData ? (
         <>
-          {/* Display the product image */}
           <View style={styles.imageContainer}>
             <Image
               resizeMode="contain"
@@ -46,12 +69,12 @@ export default function ProductScreen({ route, navigation }) {
             />
           </View>
 
-          {productData && productData.images.nodes.length > 0 && (
+          {productData.images.nodes.length > 0 && (
             <FlatList
               data={productData.images.nodes}
               horizontal
               showsHorizontalScrollIndicator={false}
-              keyExtractor={(item, index) => item.id || String(index)}
+              keyExtractor={(item, index) => String(index)}
               renderItem={({ item }) => (
                 <Pressable onPress={() => setSelectedImage(item.url)}>
                   <View style={styles.thumbnailImageContainer}>
@@ -75,9 +98,29 @@ export default function ProductScreen({ route, navigation }) {
 
           <Text style={styles.title}>{productData.title}</Text>
 
-          <Text style={styles.inventory}>
-            Total Inventory: {productData.totalInventory}
-          </Text>
+          {productData.variants.nodes.length > 0 && (
+            <View style={styles.detailBox}>
+              {renderDetail(
+                "Weight",
+                `${productData.variants.nodes[0].weight} ${productData.variants.nodes[0].weightUnit}`
+              )}
+              {productData.variants.nodes[0].inventoryItem.inventoryLevels &&
+                renderInventoryLocation(
+                  productData.variants.nodes[0].inventoryItem.inventoryLevels
+                )}
+            </View>
+          )}
+
+          {productData.metafields.nodes.length > 0 && (
+            <View style={styles.metafieldBox}>
+              {productData.metafields.nodes.map((metafield, index) => (
+                <View key={index} style={styles.metafieldRow}>
+                  <Text style={styles.metafieldName}>{metafield.key}:</Text>
+                  <Text style={styles.metafieldValue}>{metafield.value}</Text>
+                </View>
+              ))}
+            </View>
+          )}
 
           <View style={styles.addToCartButton}>
             <Pressable>
@@ -86,9 +129,7 @@ export default function ProductScreen({ route, navigation }) {
           </View>
 
           <Text style={styles.descriptionTitle}>Description</Text>
-          <Text>
-            <HTMLView value={productData.descriptionHtml} />
-          </Text>
+          <HTMLView value={productData.descriptionHtml} />
         </>
       ) : (
         <View style={styles.centeredView}>
@@ -112,7 +153,6 @@ const styles = StyleSheet.create({
     height: 500,
   },
   imageContainer: {
-    Width: 200,
     height: 300,
     padding: 20,
     borderRadius: 10,
@@ -140,7 +180,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     marginTop: 5,
-    marginBottom: 40,
+    marginBottom: 30,
     textAlign: "center",
   },
   price: {
@@ -168,11 +208,50 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginBottom: 10,
   },
-  inventory: {
-    backgroundColor: "#B5B5B5",
-    textAlign: "center",
-    padding: 20,
-    fontSize: 20,
+  detailBox: {
+    padding: 10,
+    backgroundColor: "#fff",
+    borderRadius: 5,
+    marginVertical: 10,
+  },
+  detailRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 5,
+  },
+  detailLabel: {
     fontWeight: "bold",
+    fontSize: 16,
+    color: "#333",
+    marginRight: 5,
+    fontSize: "18px",
+  },
+  detailValue: {
+    fontSize: 16,
+    color: "#333",
+    fontSize: "18px",
+  },
+  metafieldBox: {
+    padding: 10,
+    backgroundColor: "#fff",
+    borderRadius: 5,
+    marginVertical: 10,
+  },
+  metafieldRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 5,
+  },
+  metafieldName: {
+    fontWeight: "bold",
+    fontSize: 16,
+    color: "#333",
+    marginRight: 5,
+    fontSize: "18px",
+  },
+  metafieldValue: {
+    fontSize: 16,
+    color: "#333",
+    fontSize: "18px",
   },
 });

@@ -24,25 +24,54 @@ const productDetails = functions
 
       const graphqlQuery = JSON.stringify({
         query: `{
-        product(id: "${fullProductId}") {
-          id
-          title
-          images(first: 10) {
-            nodes {
-              url
+          product(id: "${fullProductId}") {
+            id
+            title
+            images(first: 10) {
+              nodes {
+                url
+              }
             }
-          }
-          priceRangeV2 {
-            minVariantPrice {
-              amount
-              currencyCode
+            productType
+            descriptionHtml
+            priceRangeV2 {
+              minVariantPrice {
+                amount
+                currencyCode
+              }
             }
+            variants(first: 1) {
+              nodes {
+                weight
+                weightUnit
+                inventoryItem {
+                  inventoryLevels(first: 10) {
+                    edges {
+                      node {
+                        id
+                        quantities(names: "available") {
+                          quantity
+                        }
+                        location {
+                          name
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            metafields(first: 10, namespace: "warehouse") {
+              nodes {
+                id
+                namespace
+                key
+                value
+              }
+            }
+            tags
           }
-          productType
-          descriptionHtml
-          totalInventory
-        }
-      }`,
+        }`,
       });
 
       try {
