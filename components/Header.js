@@ -357,7 +357,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#E4E4E4",
     zIndex: 10,
     elevation: 1000,
-    height: "100vh",
+    height: "auto",
     padding: 15,
   },
   priceContainer: {
@@ -429,23 +429,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
   },
-  closeButton: {
-    position: "absolute",
-    top: 25,
-    right: 25,
-    backgroundColor: "#131313",
-    width: 30,
-    height: 30,
-    borderRadius: 5,
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 11,
-  },
-  closeButtonText: {
-    fontSize: 15,
-    color: "white",
-    fontWeight: "bold",
-  },
   noResultsText: {
     alignSelf: "center",
     fontSize: 16,
@@ -493,8 +476,8 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     position: "absolute",
-    bottom: 60,
-    right: 40,
+    bottom: 80,
+    right: 50,
     backgroundColor: "white",
     width: 40,
     height: 40,
