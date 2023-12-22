@@ -15,23 +15,28 @@ export default function ProductScreen({ route, navigation }) {
   const { productId, key } = route.params;
   const [productData, setProductData] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const url = `https://us-central1-romc-mobile-app.cloudfunctions.net/productDetails-productDetails?productId=${productId}`;
 
   useEffect(() => {
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        const product = data.data.product;
-        console.log(data);
-        setProductData(product);
-        if (product.images.nodes.length > 0) {
-          setSelectedImage(product.images.nodes[0].url);
+    const fetchData = async () => {
+      setIsLoading(true); // Start loading
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        setProductData(data.data.product);
+        if (data.data.product.images.nodes.length > 0) {
+          setSelectedImage(data.data.product.images.nodes[0].url);
         }
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching data: ", error);
-      });
+      } finally {
+        setIsLoading(false); // Stop loading
+      }
+    };
+
+    fetchData();
   }, [productId, key]);
 
   const renderInventoryLocation = (inventoryLevels) => {
@@ -59,82 +64,86 @@ export default function ProductScreen({ route, navigation }) {
 
   return (
     <ScrollView style={styles.container}>
-      {productData ? (
-        <>
-          <View style={styles.imageContainer}>
-            <Image
-              resizeMode="contain"
-              source={{ uri: selectedImage }}
-              style={styles.image}
-            />
-          </View>
-
-          {productData.images.nodes.length > 0 && (
-            <FlatList
-              data={productData.images.nodes}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              keyExtractor={(item, index) => String(index)}
-              renderItem={({ item }) => (
-                <Pressable onPress={() => setSelectedImage(item.url)}>
-                  <View style={styles.thumbnailImageContainer}>
-                    <Image
-                      source={{ uri: item.url }}
-                      style={styles.thumbnailImage}
-                    />
-                  </View>
-                </Pressable>
-              )}
-            />
-          )}
-
-          <Text style={styles.price}>
-            {`${parseFloat(
-              productData.priceRangeV2.minVariantPrice.amount
-            ).toFixed(2)} ${
-              productData.priceRangeV2.minVariantPrice.currencyCode
-            }`}
-          </Text>
-
-          <Text style={styles.title}>{productData.title}</Text>
-
-          {productData.variants.nodes.length > 0 && (
-            <View style={styles.detailBox}>
-              {renderDetail(
-                "Weight",
-                `${productData.variants.nodes[0].weight} ${productData.variants.nodes[0].weightUnit}`
-              )}
-              {productData.variants.nodes[0].inventoryItem.inventoryLevels &&
-                renderInventoryLocation(
-                  productData.variants.nodes[0].inventoryItem.inventoryLevels
-                )}
-            </View>
-          )}
-
-          {productData.metafields.nodes.length > 0 && (
-            <View style={styles.metafieldBox}>
-              {productData.metafields.nodes.map((metafield, index) => (
-                <View key={index} style={styles.metafieldRow}>
-                  <Text style={styles.metafieldName}>{metafield.key}:</Text>
-                  <Text style={styles.metafieldValue}>{metafield.value}</Text>
-                </View>
-              ))}
-            </View>
-          )}
-
-          <View style={styles.addToCartButton}>
-            <Pressable>
-              <Text style={styles.addToCartText}>Add to cart</Text>
-            </Pressable>
-          </View>
-
-          <Text style={styles.descriptionTitle}>Description</Text>
-          <HTMLView value={productData.descriptionHtml} />
-        </>
-      ) : (
+      {isLoading ? (
+        // Show loading indicator while data is being fetched
         <View style={styles.centeredView}>
-          <ActivityIndicator size="large" color="black" />
+          <ActivityIndicator size="large" color="#131313" />
         </View>
+      ) : (
+        // Once data is fetched, display product details
+        productData && (
+          <>
+            <View style={styles.imageContainer}>
+              <Image
+                resizeMode="contain"
+                source={{ uri: selectedImage }}
+                style={styles.image}
+              />
+            </View>
+
+            {productData.images.nodes.length > 0 && (
+              <FlatList
+                data={productData.images.nodes}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                keyExtractor={(item, index) => String(index)}
+                renderItem={({ item }) => (
+                  <Pressable onPress={() => setSelectedImage(item.url)}>
+                    <View style={styles.thumbnailImageContainer}>
+                      <Image
+                        source={{ uri: item.url }}
+                        style={styles.thumbnailImage}
+                      />
+                    </View>
+                  </Pressable>
+                )}
+              />
+            )}
+
+            <Text style={styles.price}>
+              {`${parseFloat(
+                productData.priceRangeV2.minVariantPrice.amount
+              ).toFixed(2)} ${
+                productData.priceRangeV2.minVariantPrice.currencyCode
+              }`}
+            </Text>
+
+            <Text style={styles.title}>{productData.title}</Text>
+
+            {productData.variants.nodes.length > 0 && (
+              <View style={styles.detailBox}>
+                {renderDetail(
+                  "Weight",
+                  `${productData.variants.nodes[0].weight} ${productData.variants.nodes[0].weightUnit}`
+                )}
+                {productData.variants.nodes[0].inventoryItem.inventoryLevels &&
+                  renderInventoryLocation(
+                    productData.variants.nodes[0].inventoryItem.inventoryLevels
+                  )}
+              </View>
+            )}
+
+            {productData.metafields.nodes.length > 0 && (
+              <View style={styles.metafieldBox}>
+                {productData.metafields.nodes.map((metafield, index) => (
+                  <View key={index} style={styles.metafieldRow}>
+                    <Text style={styles.metafieldName}>{metafield.key}:</Text>
+                    <Text style={styles.metafieldValue}>{metafield.value}</Text>
+                  </View>
+                ))}
+              </View>
+            )}
+
+            <View style={styles.addToCartButton}>
+              <Pressable>
+                <Text style={styles.addToCartText}>Add to cart</Text>
+              </Pressable>
+            </View>
+
+            <Text style={styles.descriptionTitle}>Description</Text>
+            <HTMLView value={productData.descriptionHtml} />
+          </>
+        )
       )}
     </ScrollView>
   );
@@ -221,15 +230,13 @@ const styles = StyleSheet.create({
   },
   detailLabel: {
     fontWeight: "bold",
-    fontSize: 16,
+    fontSize: 18,
     color: "#333",
     marginRight: 5,
-    fontSize: "18px",
   },
   detailValue: {
-    fontSize: 16,
+    fontSize: 18,
     color: "#333",
-    fontSize: "18px",
   },
   metafieldBox: {
     padding: 10,
@@ -244,14 +251,12 @@ const styles = StyleSheet.create({
   },
   metafieldName: {
     fontWeight: "bold",
-    fontSize: 16,
+    fontSize: 18,
     color: "#333",
     marginRight: 5,
-    fontSize: "18px",
   },
   metafieldValue: {
-    fontSize: 16,
+    fontSize: 18,
     color: "#333",
-    fontSize: "18px",
   },
 });

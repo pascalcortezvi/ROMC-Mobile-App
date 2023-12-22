@@ -6,8 +6,11 @@ import {
   Image,
   ScrollView,
   Text,
-  TouchableOpacity,
+  Pressable,
+  TouchableWithoutFeedback,
+  Keyboard,
   Modal,
+  Dimensions,
 } from "react-native";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { BarCodeScanner } from "expo-barcode-scanner";
@@ -20,6 +23,21 @@ const Header = ({ isDropdownVisible, setDropdownVisible }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [isScannerVisible, setIsScannerVisible] = useState(false);
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener("keyboardDidShow", (e) => {
+      setKeyboardHeight(e.endCoordinates.height);
+    });
+    const hideSubscription = Keyboard.addListener("keyboardDidHide", () => {
+      setKeyboardHeight(0);
+    });
+
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    };
+  }, []);
 
   const isInStockCollection = (collections, targetCollectionId) => {
     // Check if collections is an array and has elements
@@ -70,7 +88,6 @@ const Header = ({ isDropdownVisible, setDropdownVisible }) => {
         )}`
       );
       const data = await response.json();
-      console.log("Response Data:", data); // Add this line to log the response data
       setSearchResults(data);
       setDropdownVisible(true);
     } catch (error) {
@@ -89,12 +106,29 @@ const Header = ({ isDropdownVisible, setDropdownVisible }) => {
       return <Text style={styles.noResultsText}>No result</Text>;
     }
     return searchResults.map((item, index) => (
-      <TouchableOpacity
+      <Pressable
         key={index}
         style={styles.gridItem}
         onPress={() => {
-          setSearchQuery("");
-          setDropdownVisible(false);
+          // Dismiss the keyboard first
+          Keyboard.dismiss();
+
+          // Delay navigation to allow the keyboard to dismiss
+          setTimeout(() => {
+            const numericProductId = item.id.split("/").pop();
+            if (!isNaN(numericProductId)) {
+              navigation.navigate("Product", {
+                productId: numericProductId,
+                key: new Date().getTime(),
+              });
+
+              // Reset the search query and close the dropdown
+              setSearchQuery("");
+              setDropdownVisible(false);
+            } else {
+              console.log("Invalid product ID:", numericProductId);
+            }
+          }, 50); // A brief delay, e.g., 50 milliseconds
         }}
       >
         <View style={styles.itemContent}>
@@ -135,15 +169,12 @@ const Header = ({ isDropdownVisible, setDropdownVisible }) => {
             {/* Call renderInStockLabel with item */}
           </View>
         </View>
-      </TouchableOpacity>
+      </Pressable>
     ));
   };
 
-  const handleClosePress = () => {
-    setDropdownVisible(false);
-  };
-
   const handleScanIconPress = async () => {
+    Keyboard.dismiss();
     // If permission is already granted, just open the scanner
     if (hasPermission) {
       setIsScannerVisible(true);
@@ -212,12 +243,23 @@ const Header = ({ isDropdownVisible, setDropdownVisible }) => {
           placeholder="Search products..."
           style={styles.searchBar}
           selectionColor="white"
-          onChangeText={setSearchQuery}
+          onChangeText={(text) => setSearchQuery(text)}
           value={searchQuery}
         />
-        <TouchableOpacity style={styles.scanIcon} onPress={handleScanIconPress}>
+        {searchQuery.length > 0 && (
+          <Pressable
+            style={styles.clearButton}
+            onPress={() => {
+              setSearchQuery("");
+              Keyboard.dismiss(); // Add this line to dismiss the keyboard
+            }}
+          >
+            <Text style={styles.clearButtonText}>X</Text>
+          </Pressable>
+        )}
+        <Pressable style={styles.scanIcon} onPress={handleScanIconPress}>
           <FontAwesomeIcon name="barcode" size={24} color="white" />
-        </TouchableOpacity>
+        </Pressable>
       </View>
       <Modal
         visible={isScannerVisible}
@@ -230,28 +272,36 @@ const Header = ({ isDropdownVisible, setDropdownVisible }) => {
         >
           <View style={styles.cameraContainer}>
             <View style={styles.scanFrame} />
-            <TouchableOpacity
+            <Pressable
               style={styles.closeButton}
               onPress={() => setIsScannerVisible(false)}
             >
               <Text style={styles.closeButtonText}>X</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         </BarCodeScanner>
       </Modal>
 
       {isDropdownVisible && (
-        <View style={styles.dropdown}>
-          <ScrollView contentContainerStyle={styles.gridContainer}>
-            {renderGridItems()}
-          </ScrollView>
-          <TouchableOpacity
-            style={styles.closeButton}
-            onPress={handleClosePress}
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View
+            style={[
+              styles.dropdown,
+              {
+                maxHeight:
+                  Dimensions.get("window").height - keyboardHeight - 90,
+              },
+            ]}
           >
-            <Text style={styles.closeButtonText}>X</Text>
-          </TouchableOpacity>
-        </View>
+            <ScrollView
+              contentContainerStyle={styles.gridContainer}
+              keyboardShouldPersistTaps="handled"
+              showsVerticalScrollIndicator={false}
+            >
+              {renderGridItems()}
+            </ScrollView>
+          </View>
+        </TouchableWithoutFeedback>
       )}
     </View>
   );
@@ -285,6 +335,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "white",
   },
+  clearButton: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "white",
+    marginRight: 5,
+  },
+  clearButtonText: {
+    fontSize: 13,
+    color: "#131313",
+    fontWeight: "bold",
+  },
   dropdown: {
     position: "absolute",
     top: 90,
@@ -293,8 +357,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#E4E4E4",
     zIndex: 10,
     elevation: 1000,
-    maxHeight: 500,
-    minHeight: 500,
+    height: "100vh",
     padding: 15,
   },
   priceContainer: {
@@ -392,7 +455,7 @@ const styles = StyleSheet.create({
   },
   labelContainer: {
     flexDirection: "row",
-    alignItems: "center", // Align items horizontally
+    alignItems: "center",
     marginTop: 10,
   },
   inStoreWrapper: {
@@ -430,21 +493,16 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     position: "absolute",
-    bottom: 100,
+    bottom: 60,
     right: 40,
     backgroundColor: "white",
-    width: 50,
-    height: 50,
-    opacity: 0.5,
+    width: 40,
+    height: 40,
     borderRadius: 25,
     justifyContent: "center",
     alignItems: "center",
     zIndex: 2,
     elevation: 2,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
   },
   closeButtonText: {
     color: "#131313",

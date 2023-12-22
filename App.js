@@ -4,7 +4,6 @@ import {
   StyleSheet,
   View,
   TouchableOpacity,
-  Text,
   Image,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
