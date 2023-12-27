@@ -10,6 +10,7 @@ import {
   FlatList,
 } from "react-native";
 import HTMLView from "react-native-htmlview";
+import BringButton from "../components/BringButton";
 
 export default function ProductScreen({ route, navigation }) {
   const { productId, key } = route.params;
@@ -133,6 +134,8 @@ export default function ProductScreen({ route, navigation }) {
                 ))}
               </View>
             )}
+
+            <BringButton productData={productData} />
 
             <View style={styles.addToCartButton}>
               <Pressable>

@@ -2,9 +2,17 @@ import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Image, ActivityIndicator } from "react-native";
 
 export default function Banner() {
+  // ------------------------------------------------------------------
+  // ------------------------------------------------------------------
+  // ------------------------------------------------------------------
+  // VARIABLES DECLARATION
   const [imageUrl, setImageUrl] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  // ------------------------------------------------------------------
+  // ------------------------------------------------------------------
+  // ------------------------------------------------------------------
+  // FETCH METAOBJECT URL FROM SHOPIFY USING useEffect FOR LOADING STATE
   useEffect(() => {
     fetch(
       "https://us-central1-romc-mobile-app.cloudfunctions.net/banner-banner"
@@ -23,6 +31,10 @@ export default function Banner() {
       });
   }, []);
 
+  // ------------------------------------------------------------------
+  // ------------------------------------------------------------------
+  // ------------------------------------------------------------------
+  // SHOW LOADING UNTIL DATA IS READY TO SHOW
   return (
     <View style={styles.bannerContainer}>
       {isLoading ? (

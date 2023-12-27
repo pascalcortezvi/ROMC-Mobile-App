@@ -14,8 +14,17 @@ export default function FeaturedCollection({
   collectionId,
   navigation,
 }) {
+  // ------------------------------------------------------------------
+  // ------------------------------------------------------------------
+  // ------------------------------------------------------------------
+  // VARIABLES DECLARATION
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  // ------------------------------------------------------------------
+  // ------------------------------------------------------------------
+  // ------------------------------------------------------------------
+  // FETCH METAOBJECT URL FROM SHOPIFY USING useEffect FOR LOADING STATE
 
   useEffect(() => {
     const collectionUrlId = `gid://shopify/Collection/${collectionId}`;
@@ -45,6 +54,10 @@ export default function FeaturedCollection({
       });
   }, [collectionId]);
 
+  // ------------------------------------------------------------------
+  // ------------------------------------------------------------------
+  // ------------------------------------------------------------------
+  // SHOW LOADING UNTIL DATA IS READY TO SHOW
   return (
     <View style={styles.component}>
       <View style={styles.header}>
