@@ -1,10 +1,20 @@
 import React, { useState } from "react";
-import { View, Alert, StyleSheet, Pressable, Text } from "react-native";
+import {
+  View,
+  Alert,
+  StyleSheet,
+  Pressable,
+  Text,
+  ActivityIndicator,
+} from "react-native";
 
 export default function BringButton({ productData }) {
   const [quantity, setQuantity] = useState(1); // Quantity as a number
+  const [loading, setLoading] = useState(false); // Loading state
 
   async function sendEmail() {
+    setLoading(true); // Set loading to true when sending email
+
     const dataToSend = {
       ...productData,
       quantity, // Include the selected quantity
@@ -33,6 +43,8 @@ export default function BringButton({ productData }) {
     } catch (error) {
       Alert.alert("Error", "An error occurred while sending the email.");
       console.error(error);
+    } finally {
+      setLoading(false); // Set loading back to false after processing
     }
   }
 
@@ -59,6 +71,14 @@ export default function BringButton({ productData }) {
     }
   }
 
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="black" />
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Quantity Needed</Text>
@@ -82,7 +102,10 @@ export default function BringButton({ productData }) {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 30,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 240,
     marginTop: 10,
     marginBottom: 40,
     backgroundColor: "white",
@@ -129,5 +152,16 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     fontWeight: "bold",
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 240,
+    padding: 30,
+    marginTop: 10,
+    marginBottom: 40,
+    backgroundColor: "white",
+    borderRadius: 10,
   },
 });
