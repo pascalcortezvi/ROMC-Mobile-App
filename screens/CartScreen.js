@@ -121,60 +121,66 @@ export default function CartScreen({ navigation }) {
     }
   };
 
+  // Check if the cart is empty
+  const isCartEmpty = cartItems.length === 0;
+
   return (
     <View style={styles.container}>
-      <FlatList
-        data={cartItems}
-        keyExtractor={(item) => item.productId}
-        renderItem={({ item }) => (
-          <View style={styles.itemContainer}>
-            <View style={styles.imageContainer}>
-              <Image source={{ uri: item.image }} style={styles.image} />
-            </View>
-            <View style={styles.detailsContainer}>
-              <Text style={styles.title}>{item.title}</Text>
-              <Text style={styles.price}>
-                ${(item.price * item.quantity).toFixed(2)}
-              </Text>
-              <View style={styles.quantityAndRemoveContainer}>
-                <View style={styles.quantitySelector}>
-                  <Pressable onPress={() => decreaseQuantity(item.productId)}>
-                    <Text style={styles.quantityButtonText}>-</Text>
-                  </Pressable>
-                  <Text style={styles.quantity}>{item.quantity}</Text>
-                  <Pressable onPress={() => increaseQuantity(item.productId)}>
-                    <Text style={styles.quantityButtonText}>+</Text>
+      {isCartEmpty ? (
+        <View style={styles.emptyCartContainer}>
+          <Text style={styles.emptyCartMessage}>
+            Your cart is currently empty
+          </Text>
+        </View>
+      ) : (
+        <FlatList
+          data={cartItems}
+          keyExtractor={(item) => item.productId}
+          renderItem={({ item }) => (
+            <View style={styles.itemContainer}>
+              <View style={styles.imageContainer}>
+                <Image source={{ uri: item.image }} style={styles.image} />
+              </View>
+              <View style={styles.detailsContainer}>
+                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.price}>
+                  ${(item.price * item.quantity).toFixed(2)}
+                </Text>
+                <View style={styles.quantityAndRemoveContainer}>
+                  <View style={styles.quantitySelector}>
+                    <Pressable onPress={() => decreaseQuantity(item.productId)}>
+                      <Text style={styles.quantityButtonText}>-</Text>
+                    </Pressable>
+                    <Text style={styles.quantity}>{item.quantity}</Text>
+                    <Pressable onPress={() => increaseQuantity(item.productId)}>
+                      <Text style={styles.quantityButtonText}>+</Text>
+                    </Pressable>
+                  </View>
+                  <Pressable onPress={() => removeItemFromCart(item.productId)}>
+                    <Text style={styles.removeButtonText}>
+                      <Icon name="trash" size={24} color="#131313" />
+                    </Text>
                   </Pressable>
                 </View>
-                <Pressable onPress={() => removeItemFromCart(item.productId)}>
-                  <Text style={styles.removeButtonText}>
-                    <Icon name="trash" size={24} color="#131313" />
-                  </Text>
-                </Pressable>
               </View>
             </View>
-          </View>
-        )}
-        ListEmptyComponent={() => (
-          <View style={styles.emptyCartContainer}>
-            <Text style={styles.emptyCartMessage}>
-              Your cart is currently empty
-            </Text>
-          </View>
-        )}
-        refreshing={refreshing}
-        onRefresh={loadCart}
-        style={{ marginBottom: 100 }} // Ensure there's room for the checkout section
-      />
-      <View style={styles.checkoutContainer}>
-        <Text style={styles.totalTitle}>
-          Total: ${calculateTotalPrice().toFixed(2)}
-        </Text>
-        <Text style={styles.tax}>Taxes will be calculated at checkout</Text>
-        <Pressable style={styles.checkoutButton} onPress={handleCheckout}>
-          <Text style={styles.checkoutButtonText}>CHECKOUT</Text>
-        </Pressable>
-      </View>
+          )}
+          refreshing={refreshing}
+          onRefresh={loadCart}
+          style={{ marginBottom: 100 }} // Ensure there's room for the checkout section
+        />
+      )}
+      {!isCartEmpty && (
+        <View style={styles.checkoutContainer}>
+          <Text style={styles.totalTitle}>
+            Total: ${calculateTotalPrice().toFixed(2)}
+          </Text>
+          <Text style={styles.tax}>Taxes will be calculated at checkout</Text>
+          <Pressable style={styles.checkoutButton} onPress={handleCheckout}>
+            <Text style={styles.checkoutButtonText}>CHECKOUT</Text>
+          </Pressable>
+        </View>
+      )}
     </View>
   );
 }
