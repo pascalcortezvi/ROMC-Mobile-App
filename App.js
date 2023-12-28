@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
+import { UserProvider } from "./contexts/UserContext";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -142,29 +143,31 @@ export default function App() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.mainContent}>
-        {isDropdownVisible && (
-          <TouchableOpacity
-            style={styles.overlay}
-            activeOpacity={1}
-            onPress={handleOverlayPress}
-          />
-        )}
-        <NavigationContainer>
-          <Header
-            isDropdownVisible={isDropdownVisible}
-            setDropdownVisible={setDropdownVisible}
-          />
-          <MainTabNavigator />
-        </NavigationContainer>
-        {showSplash && (
-          <View style={styles.splashScreenOverlay}>
-            <SplashScreen />
-          </View>
-        )}
-      </View>
-    </SafeAreaView>
+    <UserProvider>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.mainContent}>
+          {isDropdownVisible && (
+            <TouchableOpacity
+              style={styles.overlay}
+              activeOpacity={1}
+              onPress={handleOverlayPress}
+            />
+          )}
+          <NavigationContainer>
+            <Header
+              isDropdownVisible={isDropdownVisible}
+              setDropdownVisible={setDropdownVisible}
+            />
+            <MainTabNavigator />
+          </NavigationContainer>
+          {showSplash && (
+            <View style={styles.splashScreenOverlay}>
+              <SplashScreen />
+            </View>
+          )}
+        </View>
+      </SafeAreaView>
+    </UserProvider>
   );
 }
 

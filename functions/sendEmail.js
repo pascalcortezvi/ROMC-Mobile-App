@@ -2,7 +2,6 @@ const functions = require("firebase-functions");
 const nodemailer = require("nodemailer");
 const cors = require("cors")({ origin: true });
 
-// Configure the email transport using the default SMTP transport and a Gmail account.
 const gmailEmail = functions.config().gmail.email;
 const gmailPassword = functions.config().gmail.password;
 const mailTransport = nodemailer.createTransport({
@@ -21,9 +20,8 @@ const sendEmail = functions.https.onRequest((request, response) => {
     }
 
     const product = request.body.productData;
-    const quantity = product.quantity || 1; // Ensure there's a default quantity
+    const quantity = product.quantity || 1;
 
-    // Extracting references from metafields
     const metafields = product.metafields.nodes;
     const rackReference =
       metafields.find((m) => m.key === "rackreference")?.value || "N/A";

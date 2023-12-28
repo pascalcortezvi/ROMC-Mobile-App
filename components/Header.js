@@ -232,11 +232,13 @@ const Header = ({ isDropdownVisible, setDropdownVisible }) => {
 
   return (
     <View style={styles.header}>
-      <Image
-        source={require("../assets/logo.webp")}
-        style={styles.logo}
-        resizeMode="contain"
-      />
+      <Pressable onPress={() => navigation.navigate("HomeScreen")}>
+        <Image
+          source={require("../assets/logo.webp")}
+          style={styles.logo}
+          resizeMode="contain"
+        />
+      </Pressable>
       <View style={styles.searchContainer}>
         <TextInput
           placeholderTextColor="white"

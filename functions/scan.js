@@ -10,8 +10,8 @@ const scan = functions
   .runWith(runtimeOpts)
   .https.onRequest((request, response) => {
     cors(request, response, async () => {
-      const shopifyDomain = "musique-red-one-music.myshopify.com";
-      const adminApiAccessToken = "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";
+      const shopifyDomain = functions.config().shopify.domain;
+      const adminApiAccessToken = functions.config().shopify.admin_api_key;
       const upc = request.query.upc;
 
       console.log("Received UPC:", upc);

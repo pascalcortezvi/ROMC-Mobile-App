@@ -10,8 +10,8 @@ const productDetails = functions
   .runWith(runtimeOpts)
   .https.onRequest((request, response) => {
     cors(request, response, async () => {
-      const shopifyDomain = "musique-red-one-music.myshopify.com";
-      const adminApiAccessToken = "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";
+      const shopifyDomain = functions.config().shopify.domain;
+      const adminApiAccessToken = functions.config().shopify.admin_api_key;
 
       // Extract the numeric product ID from the query string and construct the full ID
       const productId = request.query.productId;

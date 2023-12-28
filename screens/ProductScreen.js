@@ -7,22 +7,26 @@ import {
   ScrollView,
   Pressable,
   ActivityIndicator,
+  Alert,
   FlatList,
 } from "react-native";
 import HTMLView from "react-native-htmlview";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import BringButton from "../components/BringButton";
 
 export default function ProductScreen({ route, navigation }) {
-  const { productId, key } = route.params;
+  const { productId } = route.params;
   const [productData, setProductData] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [quantity, setQuantity] = useState(1);
+  const [cartStatus, setCartStatus] = useState("");
 
   const url = `https://us-central1-romc-mobile-app.cloudfunctions.net/productDetails-productDetails?productId=${productId}`;
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true); // Start loading
+      setIsLoading(true);
       try {
         const response = await fetch(url);
         const data = await response.json();
@@ -33,12 +37,57 @@ export default function ProductScreen({ route, navigation }) {
       } catch (error) {
         console.error("Error fetching data: ", error);
       } finally {
-        setIsLoading(false); // Stop loading
+        setIsLoading(false);
       }
     };
 
     fetchData();
-  }, [productId, key]);
+  }, [productId]);
+
+  const increaseQuantity = () => {
+    setQuantity((prev) => prev + 1);
+  };
+
+  const decreaseQuantity = () => {
+    setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+  };
+
+  const addToCart = async () => {
+    const price = parseFloat(productData.priceRangeV2.minVariantPrice.amount);
+
+    if (isNaN(price)) {
+      // Handle the case where the price is not a valid number
+      console.error("Invalid price for the product.");
+      return;
+    }
+
+    const newCartItem = {
+      productId: productData.id,
+      title: productData.title,
+      price, // Use the parsed price here
+      image: selectedImage,
+      quantity,
+    };
+
+    try {
+      const cartStr = await AsyncStorage.getItem("cart");
+      const cart = cartStr ? JSON.parse(cartStr) : [];
+      const isItemInCart = cart.some(
+        (item) => item.productId === newCartItem.productId
+      );
+
+      if (!isItemInCart) {
+        cart.push(newCartItem);
+        await AsyncStorage.setItem("cart", JSON.stringify(cart));
+        setCartStatus("Item added to cart!");
+      } else {
+        setCartStatus("Item already in cart!");
+      }
+    } catch (error) {
+      console.error("Error adding item to cart: ", error);
+      Alert.alert("Error", "Could not add item to cart.");
+    }
+  };
 
   const renderInventoryLocation = (inventoryLevels) => {
     return inventoryLevels.edges.map((edge, index) => {
@@ -66,12 +115,10 @@ export default function ProductScreen({ route, navigation }) {
   return (
     <ScrollView style={styles.container}>
       {isLoading ? (
-        // Show loading indicator while data is being fetched
         <View style={styles.centeredView}>
           <ActivityIndicator size="large" color="#131313" />
         </View>
       ) : (
-        // Once data is fetched, display product details
         productData && (
           <>
             <View style={styles.imageContainer}>
@@ -101,15 +148,14 @@ export default function ProductScreen({ route, navigation }) {
               />
             )}
 
-            <Text style={styles.price}>
-              {`${parseFloat(
-                productData.priceRangeV2.minVariantPrice.amount
-              ).toFixed(2)} ${
-                productData.priceRangeV2.minVariantPrice.currencyCode
-              }`}
-            </Text>
-
             <Text style={styles.title}>{productData.title}</Text>
+            <Text style={styles.price}>
+              $
+              {parseFloat(
+                productData.priceRangeV2.minVariantPrice.amount
+              ).toFixed(2)}{" "}
+              {productData.priceRangeV2.minVariantPrice.currencyCode}
+            </Text>
 
             {productData.variants.nodes.length > 0 && (
               <View style={styles.detailBox}>
@@ -137,11 +183,29 @@ export default function ProductScreen({ route, navigation }) {
 
             <BringButton productData={productData} />
 
-            <View style={styles.addToCartButton}>
-              <Pressable>
-                <Text style={styles.addToCartText}>Add to cart</Text>
+            <View style={styles.quantitySelector}>
+              <Pressable
+                onPress={decreaseQuantity}
+                style={styles.quantityButton}
+              >
+                <Text style={styles.quantityButtonText}>-</Text>
+              </Pressable>
+              <Text style={styles.quantity}>{quantity}</Text>
+              <Pressable
+                onPress={increaseQuantity}
+                style={styles.quantityButton}
+              >
+                <Text style={styles.quantityButtonText}>+</Text>
               </Pressable>
             </View>
+
+            {!!cartStatus && (
+              <Text style={styles.cartStatus}>{cartStatus}</Text>
+            )}
+
+            <Pressable style={styles.addToCartButton} onPress={addToCart}>
+              <Text style={styles.addToCartText}>Add to cart</Text>
+            </Pressable>
 
             <Text style={styles.descriptionTitle}>Description</Text>
             <HTMLView value={productData.descriptionHtml} />
@@ -191,14 +255,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "bold",
-    marginTop: 5,
-    marginBottom: 30,
+    marginTop: 50,
+    marginBottom: 10,
     textAlign: "center",
   },
   price: {
     fontSize: 24,
-    marginBottom: 10,
-    marginTop: 40,
+    marginBottom: 20,
     textAlign: "center",
   },
   addToCartButton: {
@@ -261,5 +324,28 @@ const styles = StyleSheet.create({
   metafieldValue: {
     fontSize: 18,
     color: "#333",
+  },
+  cartStatus: {
+    marginTop: 10,
+    color: "green", // Adjust color based on your design
+    fontWeight: "bold",
+  },
+  quantitySelector: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 10,
+    marginVertical: 20,
+  },
+  quantityButton: {
+    backgroundColor: "#ddd",
+    padding: 10,
+    borderRadius: 5,
+  },
+  quantityButtonText: {
+    fontSize: 18, // adjust as needed
+  },
+  quantity: {
+    fontSize: 18, // adjust as needed
   },
 });

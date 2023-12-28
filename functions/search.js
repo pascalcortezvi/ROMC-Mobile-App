@@ -10,8 +10,8 @@ const search = functions
   .runWith(runtimeOpts)
   .https.onRequest((request, response) => {
     cors(request, response, async () => {
-      const shopifyDomain = "musique-red-one-music.myshopify.com";
-      const storefrontAccessToken = "ff22e43cfa2c734aea496f1307b9370b";
+      const shopifyDomain = functions.config().shopify.domain;
+      const storefrontAccessToken = functions.config().shopify.storefront_api_key;
       const searchQuery = request.query.q;
 
       const graphqlQuery = JSON.stringify({
