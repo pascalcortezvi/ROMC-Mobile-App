@@ -6,6 +6,7 @@ const scan = require("./scan");
 const sendEmail = require("./sendEmail");
 const login = require("./login");
 const createCheckout = require("./createCheckout");
+const getMenu = require("./getMenu");
 
 module.exports = {
   featuredCollection,
@@ -16,4 +17,5 @@ module.exports = {
   sendEmail,
   login,
   createCheckout,
+  getMenu,
 };
