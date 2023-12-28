@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#ECECEC",
-    paddingTop: 15,
+    paddingTop: 10,
     paddingBottom: 64,
   },
   itemContainer: {
@@ -202,15 +202,18 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginVertical: 10,
     borderRadius: 10,
+    padding: 15,
   },
   imageContainer: {
-    marginRight: 10,
-    width: 120,
-    height: 120,
+    marginRight: 15,
+    width: 150,
+    height: 150,
+    padding: 5,
   },
   image: {
     width: "100%",
     height: "100%",
+    resizeMode: "contain",
   },
   detailsContainer: {
     flex: 1,
@@ -255,7 +258,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderTopWidth: 1,
     borderTopColor: "#ddd",
-    backgroundColor: "#fff",
+    backgroundColor: "#ececec",
   },
   totalTitle: {
     fontSize: 18,
@@ -264,7 +267,7 @@ const styles = StyleSheet.create({
   },
   checkoutButton: {
     backgroundColor: "#131313",
-    padding: 25,
+    padding: 20,
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
