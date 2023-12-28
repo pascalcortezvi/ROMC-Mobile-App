@@ -5,6 +5,7 @@ const search = require("./search");
 const scan = require("./scan");
 const sendEmail = require("./sendEmail");
 const login = require("./login");
+const createCheckout = require("./createCheckout");
 
 module.exports = {
   featuredCollection,
@@ -14,4 +15,5 @@ module.exports = {
   scan,
   sendEmail,
   login,
+  createCheckout,
 };

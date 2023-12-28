@@ -6,7 +6,6 @@ import {
   FlatList,
   Image,
   Pressable,
-  ScrollView,
   Alert,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -16,11 +15,10 @@ import Icon from "react-native-vector-icons/FontAwesome";
 export default function CartScreen({ navigation }) {
   const [cartItems, setCartItems] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
-  const isFocused = useIsFocused(); // React Navigation focus listener
-
+  const isFocused = useIsFocused();
   useEffect(() => {
     loadCart();
-  }, [isFocused]); // Trigger loadCart when the screen is focused
+  }, [isFocused]);
 
   const loadCart = async () => {
     setRefreshing(true); // Start the spinner
@@ -29,12 +27,12 @@ export default function CartScreen({ navigation }) {
       if (storedCart) {
         setCartItems(JSON.parse(storedCart));
       } else {
-        setCartItems([]); // Ensure cart is empty if nothing is retrieved
+        setCartItems([]);
       }
     } catch (e) {
       console.error("Failed to fetch cart from storage.");
     } finally {
-      setRefreshing(false); // Stop the spinner regardless of the outcome
+      setRefreshing(false);
     }
   };
 
@@ -87,6 +85,42 @@ export default function CartScreen({ navigation }) {
     }, 0);
   };
 
+  const handleCheckout = async () => {
+    try {
+      const storedCart = await AsyncStorage.getItem("cart");
+      const cartItems = storedCart ? JSON.parse(storedCart) : [];
+
+      const lineItems = cartItems.map((item) => ({
+        variantId: item.variantId,
+        quantity: item.quantity,
+      }));
+
+      const checkoutFunctionUrl =
+        "https://us-central1-romc-mobile-app.cloudfunctions.net/createCheckout-createCheckout";
+
+      // Make the request to your Firebase function
+      const response = await fetch(checkoutFunctionUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ cartItems: lineItems }), // Send the lineItems as 'cartItems'
+      });
+
+      const jsonResponse = await response.json();
+      if (jsonResponse.url) {
+        // Redirect user to Shopify checkout using the returned URL
+        Linking.openURL(jsonResponse.url);
+      } else {
+        // Handle cases where no URL is returned
+        Alert.alert("Error", "Unable to proceed to checkout.");
+      }
+    } catch (error) {
+      console.error("Checkout Error:", error);
+      Alert.alert("Error", "An error occurred while trying to checkout.");
+    }
+  };
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -99,7 +133,9 @@ export default function CartScreen({ navigation }) {
             </View>
             <View style={styles.detailsContainer}>
               <Text style={styles.title}>{item.title}</Text>
-              <Text style={styles.price}>${item.price.toFixed(2)}</Text>
+              <Text style={styles.price}>
+                ${(item.price * item.quantity).toFixed(2)}
+              </Text>
               <View style={styles.quantityAndRemoveContainer}>
                 <View style={styles.quantitySelector}>
                   <Pressable onPress={() => decreaseQuantity(item.productId)}>
@@ -135,12 +171,7 @@ export default function CartScreen({ navigation }) {
           Total: ${calculateTotalPrice().toFixed(2)}
         </Text>
         <Text style={styles.tax}>Taxes will be calculated at checkout</Text>
-        <Pressable
-          style={styles.checkoutButton}
-          onPress={() => {
-            // Implement checkout functionality
-          }}
-        >
+        <Pressable style={styles.checkoutButton} onPress={handleCheckout}>
           <Text style={styles.checkoutButtonText}>CHECKOUT</Text>
         </Pressable>
       </View>
