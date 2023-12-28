@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
     right: 0,
     padding: 20,
     borderTopWidth: 1,
-    borderTopColor: "#ddd",
+    borderColor: "#AFAFAF",
     backgroundColor: "#ececec",
   },
   totalTitle: {
