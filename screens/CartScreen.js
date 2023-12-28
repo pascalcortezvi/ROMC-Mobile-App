@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#ECECEC",
-    marginTop: 15,
+    paddingTop: 15,
     paddingBottom: 64,
   },
   itemContainer: {
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
   quantitySelector: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#C7C7C7",
+    backgroundColor: "#D8D8D8",
     paddingHorizontal: 15,
     borderRadius: 10,
   },
