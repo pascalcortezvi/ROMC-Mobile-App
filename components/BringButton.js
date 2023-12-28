@@ -82,8 +82,11 @@ export default function BringButton({ productData }) {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
-    marginTop: 50,
+    padding: 30,
+    marginTop: 10,
+    marginBottom: 40,
+    backgroundColor: "white",
+    borderRadius: 10,
   },
   title: {
     fontSize: 20,

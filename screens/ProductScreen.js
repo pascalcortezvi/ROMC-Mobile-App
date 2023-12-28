@@ -284,10 +284,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   detailBox: {
-    padding: 10,
+    padding: 15,
     backgroundColor: "#fff",
     borderRadius: 5,
-    marginVertical: 10,
+    marginTop: 20,
+    marginBottom: 10,
   },
   detailRow: {
     flexDirection: "row",
@@ -305,7 +306,7 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   metafieldBox: {
-    padding: 10,
+    padding: 15,
     backgroundColor: "#fff",
     borderRadius: 5,
     marginVertical: 10,
@@ -335,17 +336,19 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     padding: 10,
-    marginVertical: 20,
   },
   quantityButton: {
-    backgroundColor: "#ddd",
-    padding: 10,
-    borderRadius: 5,
+    backgroundColor: "#D8D8D8",
+    paddingVertical: 10,
+    paddingHorizontal: 40,
+    borderRadius: 10,
   },
   quantityButtonText: {
-    fontSize: 18, // adjust as needed
+    fontSize: 24, // adjust as needed
+    fontWeight: "bold",
   },
   quantity: {
-    fontSize: 18, // adjust as needed
+    fontSize: 24, // adjust as needed
+    fontWeight: "bold",
   },
 });
