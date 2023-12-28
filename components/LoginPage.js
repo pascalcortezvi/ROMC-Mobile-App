@@ -101,7 +101,7 @@ export default function LoginPage({ navigation }) {
         <Text style={styles.authStatusText}>Logged In</Text>
       )}
       <Text style={styles.tagStatusText}>
-        {user && user.tags && user.tags.includes("staff") ? "YES" : "NO"}
+        {user && user.tags && user.tags.includes("staff") ? "STAFF AUTHENTICATED" : "NORMAL USER"}
       </Text>
     </View>
   );

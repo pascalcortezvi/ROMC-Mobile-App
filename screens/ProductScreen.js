@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import {
   View,
   Text,
@@ -9,10 +9,12 @@ import {
   ActivityIndicator,
   Alert,
   FlatList,
+  Animated,
 } from "react-native";
 import HTMLView from "react-native-htmlview";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import BringButton from "../components/BringButton";
+import { UserContext } from "../contexts/UserContext";
 
 export default function ProductScreen({ route, navigation }) {
   const { productId } = route.params;
@@ -21,6 +23,8 @@ export default function ProductScreen({ route, navigation }) {
   const [isLoading, setIsLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const [cartStatus, setCartStatus] = useState("");
+
+  const { user } = useContext(UserContext);
 
   const url = `https://us-central1-romc-mobile-app.cloudfunctions.net/productDetails-productDetails?productId=${productId}`;
 
@@ -112,6 +116,30 @@ export default function ProductScreen({ route, navigation }) {
     );
   };
 
+  // Initialize animated value
+  const blinkAnim = useRef(new Animated.Value(0)).current;
+
+  // Blinking effect logic
+  useEffect(() => {
+    const blinking = Animated.loop(
+      Animated.sequence([
+        Animated.timing(blinkAnim, {
+          toValue: 1,
+          duration: 900,
+          useNativeDriver: true,
+        }),
+        Animated.timing(blinkAnim, {
+          toValue: 0,
+          duration: 900,
+          useNativeDriver: true,
+        }),
+      ])
+    );
+
+    blinking.start();
+    return () => blinking.stop(); // Clean up the animation on component unmount
+  }, [blinkAnim]);
+
   return (
     <ScrollView style={styles.container}>
       {isLoading ? (
@@ -156,6 +184,41 @@ export default function ProductScreen({ route, navigation }) {
               ).toFixed(2)}{" "}
               {productData.priceRangeV2.minVariantPrice.currencyCode}
             </Text>
+
+            <View style={styles.availabilityContainer}>
+              <View style={styles.blocksContainer}>
+                <View style={styles.inStoreContainer}>
+                  <Text style={styles.blockTitle}>In-Store</Text>
+                  <View style={styles.availabilityStatus}>
+                    {productData.tags &&
+                    productData.tags.includes("in-stock") ? (
+                      <>
+                        <Animated.View
+                          style={{ ...styles.blinkingDot, opacity: blinkAnim }}
+                        />
+                        <Text style={styles.availableText}>Available</Text>
+                      </>
+                    ) : (
+                      <>
+                        <Text style={styles.notAvailableText}>
+                          Not Available
+                        </Text>
+                      </>
+                    )}
+                  </View>
+                </View>
+
+                <View style={styles.onlineContainer}>
+                  <Text style={styles.blockTitle}>Online</Text>
+                  <View style={styles.availabilityStatus}>
+                    <Animated.View
+                      style={{ ...styles.blinkingDot, opacity: blinkAnim }}
+                    />
+                    <Text style={styles.availableText}>Available</Text>
+                  </View>
+                </View>
+              </View>
+            </View>
 
             {productData.variants.nodes.length > 0 && (
               <View style={styles.detailBox}>
@@ -219,7 +282,6 @@ export default function ProductScreen({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#ECECEC",
     paddingTop: 20,
     padding: 20,
   },
@@ -253,16 +315,88 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   title: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: "bold",
     marginTop: 50,
-    marginBottom: 10,
+    marginBottom: 15,
     textAlign: "center",
   },
   price: {
-    fontSize: 24,
+    fontSize: 20,
     marginBottom: 20,
     textAlign: "center",
+  },
+  availabilityContainer: {
+    borderRadius: 10,
+    marginTop: 20,
+    marginBottom: 20,
+    alignItems: "center", // Center the title
+  },
+  blocksContainer: {
+    flexDirection: "row",
+    width: "100%",
+  },
+  inStoreContainer: {
+    flex: 1,
+    alignItems: "center",
+    // Ensure padding is not too large, especially the vertical padding
+    padding: 15,
+    justifyContent: "center",
+    borderRadius: 10,
+    backgroundColor: "#131313",
+    marginHorizontal: 5,
+  },
+  onlineContainer: {
+    flex: 1,
+    alignItems: "center",
+    padding: 15,
+    borderRadius: 10,
+    backgroundColor: "#131313",
+    marginHorizontal: 5,
+    justifyContent: "center",
+  },
+  blockTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 2,
+    color: "white",
+  },
+  availabilityText: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  availabilityStatus: {
+    flexDirection: "row",
+    alignItems: "center",
+    // Minimize or remove the top margin to reduce space between title and status
+    marginTop: 2,
+  },
+  blinkingDot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: "#6EDC7B",
+    marginRight: 8,
+  },
+  availableText: {
+    color: "#6EDC7B",
+    fontSize: 15,
+    fontWeight: "bold",
+  },
+  notAvailableText: {
+    color: "#EC4343",
+    fontSize: 15,
+    fontWeight: "bold",
+  },
+  notInStockContainer: {
+    color: "white", // Color for emphasis, adjust as needed
+    backgroundColor: "#131313",
+    borderRadius: 50,
+  },
+  notInStock: {
+    fontSize: 15,
+    fontWeight: "bold",
+    marginRight: 10,
   },
   addToCartButton: {
     backgroundColor: "#131313",

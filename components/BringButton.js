@@ -104,12 +104,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
-    height: 240,
     marginTop: 10,
     marginBottom: 40,
     backgroundColor: "white",
     borderRadius: 10,
+    paddingHorizontal: 30,
+    minHeight: 240,
   },
   title: {
     fontSize: 20,
