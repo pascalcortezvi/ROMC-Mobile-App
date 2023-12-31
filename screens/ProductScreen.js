@@ -21,6 +21,7 @@ export default function ProductScreen({ route, navigation }) {
   const [productData, setProductData] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [compareAtPrice, setCompareAtPrice] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [cartStatus, setCartStatus] = useState("");
 
@@ -35,6 +36,10 @@ export default function ProductScreen({ route, navigation }) {
         const response = await fetch(url);
         const data = await response.json();
         setProductData(data.data.product);
+        setCompareAtPrice(
+          data.data.product.compareAtPriceRange?.minVariantCompareAtPrice
+            ?.amount
+        ); // set compare at price
         if (data.data.product.images.nodes.length > 0) {
           setSelectedImage(data.data.product.images.nodes[0].url);
         }
@@ -60,7 +65,6 @@ export default function ProductScreen({ route, navigation }) {
     const price = parseFloat(productData.priceRangeV2.minVariantPrice.amount);
 
     if (isNaN(price)) {
-      // Handle the case where the price is not a valid number
       console.error("Invalid price for the product.");
       return;
     }
@@ -68,7 +72,7 @@ export default function ProductScreen({ route, navigation }) {
     const newCartItem = {
       productId: productData.id,
       title: productData.title,
-      price, // Use the parsed price here
+      price,
       image: selectedImage,
       quantity,
     };
@@ -116,10 +120,8 @@ export default function ProductScreen({ route, navigation }) {
     );
   };
 
-  // Initialize animated value
   const blinkAnim = useRef(new Animated.Value(0)).current;
 
-  // Blinking effect logic
   useEffect(() => {
     const blinking = Animated.loop(
       Animated.sequence([
@@ -137,7 +139,7 @@ export default function ProductScreen({ route, navigation }) {
     );
 
     blinking.start();
-    return () => blinking.stop(); // Clean up the animation on component unmount
+    return () => blinking.stop();
   }, [blinkAnim]);
 
   return (
@@ -177,13 +179,20 @@ export default function ProductScreen({ route, navigation }) {
             )}
 
             <Text style={styles.title}>{productData.title}</Text>
-            <Text style={styles.price}>
-              $
-              {parseFloat(
-                productData.priceRangeV2.minVariantPrice.amount
-              ).toFixed(2)}{" "}
-              {productData.priceRangeV2.minVariantPrice.currencyCode}
-            </Text>
+            <View style={styles.priceContainer}>
+              {compareAtPrice && (
+                <Text style={styles.compareAtPrice}>
+                  ${parseFloat(compareAtPrice).toFixed(2)}
+                </Text>
+              )}
+              <Text style={styles.price}>
+                $
+                {parseFloat(
+                  productData.priceRangeV2.minVariantPrice.amount
+                ).toFixed(2)}{" "}
+                {productData.priceRangeV2.minVariantPrice.currencyCode}
+              </Text>
+            </View>
 
             <View style={styles.availabilityContainer}>
               <View style={styles.blocksContainer}>
@@ -484,5 +493,22 @@ const styles = StyleSheet.create({
   quantity: {
     fontSize: 24, // adjust as needed
     fontWeight: "bold",
+  },
+  priceContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  compareAtPrice: {
+    textDecorationLine: "line-through",
+    color: "grey",
+    fontSize: 18,
+    marginRight: 8,
+    marginBottom: 20,
+  },
+  price: {
+    fontSize: 20,
+    textAlign: "center",
+    marginBottom: 20,
   },
 });

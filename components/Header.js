@@ -143,6 +143,7 @@ const Header = ({ isDropdownVisible, setDropdownVisible }) => {
 
           <View style={styles.itemTextContainer}>
             <View style={styles.priceContainer}>
+              {/* Display the price and compare at price */}
               <Text
                 style={
                   item.compareAtPriceRange.minVariantPrice.amount > 0
@@ -401,7 +402,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   resultPriceDiscounted: {
-    color: "#D80000",
+    color: "#131313",
     fontSize: 18,
     fontWeight: "bold",
     marginRight: 10,
@@ -496,6 +497,12 @@ const styles = StyleSheet.create({
   },
   scanIcon: {
     marginLeft: 10,
+  },
+  resultComparePrice: {
+    textDecorationLine: "line-through",
+    color: "grey",
+    marginLeft: 5,
+    fontSize: 14, // slightly smaller font size for crossed out price
   },
 });
 

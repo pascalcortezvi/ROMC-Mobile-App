@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   FlatList,
   TouchableWithoutFeedback,
   ActivityIndicator,
+  Animated,
 } from "react-native";
 
 export default function FeaturedCollection({
@@ -14,17 +15,8 @@ export default function FeaturedCollection({
   collectionId,
   navigation,
 }) {
-  // ------------------------------------------------------------------
-  // ------------------------------------------------------------------
-  // ------------------------------------------------------------------
-  // VARIABLES DECLARATION
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  // ------------------------------------------------------------------
-  // ------------------------------------------------------------------
-  // ------------------------------------------------------------------
-  // FETCH METAOBJECT URL FROM SHOPIFY USING useEffect FOR LOADING STATE
 
   useEffect(() => {
     const collectionUrlId = `gid://shopify/Collection/${collectionId}`;
@@ -42,6 +34,15 @@ export default function FeaturedCollection({
               price: `${parseFloat(
                 product.priceRange.minVariantPrice.amount
               ).toFixed(2)} ${product.priceRange.minVariantPrice.currencyCode}`,
+              compareAtPrice:
+                product.compareAtPriceRange.minVariantPrice.amount > 0
+                  ? `${parseFloat(
+                      product.compareAtPriceRange.minVariantPrice.amount
+                    ).toFixed(2)} ${
+                      product.compareAtPriceRange.minVariantPrice.currencyCode
+                    }`
+                  : null,
+              tags: product.tags,
             };
           }
         );
@@ -54,10 +55,28 @@ export default function FeaturedCollection({
       });
   }, [collectionId]);
 
-  // ------------------------------------------------------------------
-  // ------------------------------------------------------------------
-  // ------------------------------------------------------------------
-  // SHOW LOADING UNTIL DATA IS READY TO SHOW
+  const blinkAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    const blinking = Animated.loop(
+      Animated.sequence([
+        Animated.timing(blinkAnim, {
+          toValue: 1,
+          duration: 900,
+          useNativeDriver: true,
+        }),
+        Animated.timing(blinkAnim, {
+          toValue: 0,
+          duration: 900,
+          useNativeDriver: true,
+        }),
+      ])
+    );
+
+    blinking.start();
+    return () => blinking.stop();
+  }, [blinkAnim]);
+
   return (
     <View style={styles.component}>
       <View style={styles.header}>
@@ -92,8 +111,50 @@ export default function FeaturedCollection({
                     />
                   </View>
                 )}
-                <Text style={styles.productPrice}>{item.price}</Text>
+                <View style={styles.availabilityContainer}>
+                  <View style={styles.blocksContainer}>
+                    {/* In-Store Block */}
+                    <View style={styles.inStoreContainer}>
+                      {item.tags && item.tags.includes("in-stock") ? (
+                        <>
+                          <Animated.View
+                            style={{
+                              ...styles.blinkingDot,
+                              opacity: blinkAnim,
+                            }}
+                          />
+                          <Text style={styles.availableText}>In-Store</Text>
+                        </>
+                      ) : (
+                        <>
+                          <Text style={styles.unavailableSymbol}>X</Text>
+
+                          <Text style={styles.notAvailableText}>In-Store</Text>
+                        </>
+                      )}
+                    </View>
+
+                    {/* Online Block */}
+                    <View style={styles.onlineContainer}>
+                      <Animated.View
+                        style={{ ...styles.blinkingDot, opacity: blinkAnim }}
+                      />
+                      <Text style={styles.availableText}>Online</Text>
+                    </View>
+                  </View>
+                </View>
+                <View style={styles.priceContainer}>
+                  <Text style={styles.productPrice}>{item.price}</Text>
+                  {item.compareAtPrice && (
+                    <Text style={styles.productComparePrice}>
+                      {item.compareAtPrice}
+                    </Text>
+                  )}
+                </View>
                 <Text style={styles.productTitle}>{item.title}</Text>
+                {item.compareAtPrice && (
+                  <Text style={styles.saleLabel}>SALE</Text>
+                )}
               </View>
             </TouchableWithoutFeedback>
           )}
@@ -130,28 +191,132 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: "white",
     margin: 10,
-    width: 220,
+    width: 250,
+    borderWidth: 1,
+    borderColor: "#B4B4B4",
   },
   productImageContainer: {
     height: 150,
     padding: 10,
+    marginBottom: 15,
   },
   productImage: {
     width: "100%",
     height: "100%",
     resizeMode: "contain",
   },
-  productPrice: {
-    marginTop: 10,
-    marginBottom: 10,
-    fontSize: 18,
-  },
   productTitle: {
     fontWeight: "bold",
+    fontSize: 16,
+  },
+  priceContainer: {
+    flexDirection: "row", // Align children side by side
+    alignItems: "center",
+    marginVertical: 10,
+  },
+  productPrice: {
+    fontSize: 16,
+    marginRight: 5,
+  },
+  productComparePrice: {
+    textDecorationLine: "line-through",
+    color: "grey",
+    fontSize: 12,
   },
   loadingContainer: {
     height: 200,
     justifyContent: "center",
     alignItems: "center",
+  },
+  saleLabel: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+    color: "white",
+    backgroundColor: "#131313",
+    fontSize: 13,
+    fontWeight: "bold",
+    padding: 5,
+    borderRadius: 5,
+  },
+  availabilityContainer: {
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+  blocksContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: 10,
+  },
+  inStoreContainer: {
+    flex: 1,
+    flexDirection: "row", // Align items in a row within the inStoreContainer
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 5,
+    borderRadius: 5,
+    backgroundColor: "#ECECEC",
+    borderWidth: 1,
+    borderColor: "#B4B4B4",
+  },
+  onlineContainer: {
+    flex: 1,
+    flexDirection: "row", // Align items in a row within the onlineContainer
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 5,
+    borderRadius: 5,
+    backgroundColor: "#ECECEC",
+    borderWidth: 1,
+    borderColor: "#B4B4B4",
+  },
+  blockTitle: {
+    fontSize: 12,
+    fontWeight: "bold",
+    marginBottom: 2,
+    color: "white",
+  },
+  availabilityText: {
+    fontSize: 12,
+    fontWeight: "bold",
+  },
+  availabilityStatus: {
+    flexDirection: "row",
+    alignItems: "center",
+    // Minimize or remove the top margin to reduce space between title and status
+    marginTop: 2,
+  },
+  blinkingDot: {
+    width: 5,
+    height: 5,
+    borderRadius: 5,
+    backgroundColor: "#131313",
+    marginRight: 8,
+  },
+  availableText: {
+    color: "#131313", // Green for available
+    fontSize: 12,
+    fontWeight: "bold",
+  },
+  notAvailableText: {
+    color: "#C91414", // Red for not available
+    fontSize: 12,
+    fontWeight: "bold",
+  },
+  notInStockContainer: {
+    color: "white", // Color for emphasis, adjust as needed
+    backgroundColor: "#131313",
+    borderRadius: 50,
+  },
+  notInStock: {
+    fontSize: 12,
+    fontWeight: "bold",
+    marginRight: 10,
+  },
+  unavailableSymbol: {
+    color: "#C91414",
+    marginRight: 5,
+    fontSize: 10,
+    fontWeight: "bold",
   },
 });

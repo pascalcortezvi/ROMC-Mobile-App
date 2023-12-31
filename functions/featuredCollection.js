@@ -36,6 +36,13 @@ const featuredCollection = functions.https.onRequest((request, response) => {
                 }
               }
               handle
+              compareAtPriceRange {
+                minVariantPrice {
+                  currencyCode
+                  amount
+                }
+              }
+              tags
             }
           }
         }

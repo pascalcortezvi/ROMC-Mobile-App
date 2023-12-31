@@ -70,6 +70,12 @@ const productDetails = functions
               }
             }
             tags
+            compareAtPriceRange {
+              minVariantCompareAtPrice {
+                amount
+                currencyCode
+              }
+            }
           }
         }`,
       });
