@@ -18,7 +18,9 @@
     "firebase-functions": "^4.3.1",
     "install": "^0.13.0",
     "nodemailer": "^6.9.7",
-    "npm": "^10.2.5"
+    "npm": "^10.2.5",
+    "shopify-api-node": "^3.12.7",
+    "shopify-buy": "^2.21.1"
   },
   "devDependencies": {
     "firebase-functions-test": "^3.1.0"

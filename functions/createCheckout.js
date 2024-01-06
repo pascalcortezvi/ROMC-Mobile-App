@@ -1,65 +1,44 @@
+// Import necessary modules
 const functions = require("firebase-functions");
-const fetch = require("node-fetch");
 const cors = require("cors")({ origin: true });
+const Client = require("shopify-buy");
 
-const createCheckout = functions.https.onRequest((request, response) => {
-  cors(request, response, async () => {
-    const shopifyDomain = functions.config().shopify.domain;
-    const storefrontAccessToken = functions.config().shopify.storefront_api_key;
+const client = Client.buildClient({
+  domain: "musique-red-one-music.myshopify.com",
+  storefrontAccessToken: "ff22e43cfa2c734aea496f1307b9370b",
+});
 
-    // Assuming cartItems are sent in the request body as an array of {variantId, quantity}
-    const cartItems = request.body.cartItems;
-
-    if (!cartItems || cartItems.length === 0) {
-      response.status(400).send("Cart is empty");
-      return;
-    }
-
-    // Prepare line items for the Shopify checkout creation
-    const lineItems = request.body.cartItems.map((item) => ({
-      variantId: item.variantId,
-      quantity: item.quantity,
-    }));
-
-    const graphqlQuery = {
-      query: `
-          mutation checkoutCreate($lineItems: [CheckoutLineItemInput!]!) {
-            checkoutCreate(input: { lineItems: $lineItems }) {
-              checkout {
-                webUrl
-              }
-              userErrors {
-                field
-                message
-              }
-            }
-          }
-        `,
-      variables: {
-        lineItems: lineItems,
-      },
-    };
-
+exports.createCheckout = functions.https.onRequest((req, res) => {
+  cors(req, res, async () => {
     try {
-      const shopifyResponse = await fetch(
-        `https://${shopifyDomain}/api/2023-10/graphql.json`,
-        {
-          method: "POST",
-          headers: {
-            "X-Shopify-Storefront-Access-Token": storefrontAccessToken,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(graphqlQuery),
-        }
+      const cartItems = req.body.cartItems;
+      if (!cartItems || cartItems.length === 0) {
+        return res.status(400).send("Cart is empty");
+      }
+
+      // Create a new checkout
+      const checkout = await client.checkout.create();
+
+      // Prepare line items in the format expected by the Shopify SDK
+      // Ensure variant IDs are correctly prefixed and quantities are integers
+      const lineItemsToAdd = cartItems.map((item) => ({
+        variantId: item.variantId,
+        quantity: parseInt(item.quantity, 10),
+      }));
+
+      // Add line items to the checkout
+      const checkoutWithItems = await client.checkout.addLineItems(
+        checkout.id,
+        lineItemsToAdd
       );
 
-      const jsonResponse = await shopifyResponse.json();
-      console.log(jsonResponse);
+      // Respond with the checkout webUrl
+      res.status(200).send({ url: checkoutWithItems.webUrl });
     } catch (error) {
-      console.error("Error:", error);
-      response.status(500).send("Server error");
+      console.error("Error creating checkout:", error);
+      res
+        .status(500)
+        .send({ error: "Error creating checkout", details: error.message });
     }
   });
 });
-
-module.exports = { createCheckout };

@@ -13,7 +13,6 @@ const productDetails = functions
       const shopifyDomain = functions.config().shopify.domain;
       const adminApiAccessToken = functions.config().shopify.admin_api_key;
 
-      // Extract the numeric product ID from the query string and construct the full ID
       const productId = request.query.productId;
       const fullProductId = `gid://shopify/Product/${productId}`;
 
@@ -58,6 +57,11 @@ const productDetails = functions
                       }
                     }
                   }
+                  variant {
+                    price
+                    compareAtPrice
+                    id
+                  }
                 }
               }
             }
@@ -94,7 +98,7 @@ const productDetails = functions
         );
 
         const jsonResponse = await shopifyAdminResponse.json();
-        console.log("Shopify API Response:", jsonResponse); // Log the Shopify API response
+        console.log("Shopify API Response:", jsonResponse);
         response.send(jsonResponse);
       } catch (error) {
         console.error("Error:", error);

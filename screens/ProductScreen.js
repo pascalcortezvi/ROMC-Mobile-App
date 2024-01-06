@@ -24,6 +24,8 @@ export default function ProductScreen({ route, navigation }) {
   const [compareAtPrice, setCompareAtPrice] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [cartStatus, setCartStatus] = useState("");
+  const [variantId, setVariantId] = useState(null);
+
 
   const { user } = useContext(UserContext);
 

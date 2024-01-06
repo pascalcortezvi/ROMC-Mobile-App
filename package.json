@@ -46,7 +46,9 @@
     "react-native-svg": "13.9.0",
     "react-native-vector-icons": "^10.0.3",
     "react-native-web": "~0.19.6",
-    "shopify-api-node": "^3.12.7"
+    "react-native-webview": "^13.6.4",
+    "shopify-api-node": "^3.12.7",
+    "shopify-buy": "^2.21.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

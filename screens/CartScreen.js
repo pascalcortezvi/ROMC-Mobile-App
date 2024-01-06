@@ -11,17 +11,20 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useIsFocused } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useNavigation } from "@react-navigation/native";
 
-export default function CartScreen({ navigation }) {
+export default function CartScreen() {
   const [cartItems, setCartItems] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const isFocused = useIsFocused();
+  const navigation = useNavigation();
+
   useEffect(() => {
     loadCart();
   }, [isFocused]);
 
   const loadCart = async () => {
-    setRefreshing(true); // Start the spinner
+    setRefreshing(true);
     try {
       const storedCart = await AsyncStorage.getItem("cart");
       if (storedCart) {
@@ -86,37 +89,82 @@ export default function CartScreen({ navigation }) {
   };
 
   const handleCheckout = async () => {
+    console.log("Starting handleCheckout function"); // Log when function starts
     try {
       const storedCart = await AsyncStorage.getItem("cart");
-      const cartItems = storedCart ? JSON.parse(storedCart) : [];
+      console.log("Retrieved stored cart:", storedCart); // Log the retrieved stored cart
 
-      const lineItems = cartItems.map((item) => ({
-        variantId: item.variantId,
-        quantity: item.quantity,
-      }));
+      const cartItems = storedCart ? JSON.parse(storedCart) : [];
+      console.log("Parsed cart items:", cartItems); // Log the parsed cart items
+
+      if (cartItems.length === 0) {
+        console.log("Cart is empty"); // Log for empty cart
+        Alert.alert("Error", "Your cart is empty.");
+        return;
+      }
+
+      // Assuming that each item in cartItems has a productId that can be used to find the variantId
+      const lineItems = await Promise.all(
+        cartItems.map(async (item) => {
+          // Replace with the actual URL of your Firebase function to find the variant ID
+          const variantFunctionUrl =
+            "https://us-central1-romc-mobile-app.cloudfunctions.net/findVariantId-findVariantId";
+          const variantResponse = await fetch(variantFunctionUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              productId: item.productId.split("/").pop(),
+            }),
+          });
+
+          const variantData = await variantResponse.json();
+          if (!variantData.variantId) {
+            throw new Error(
+              `Variant ID not found for product ${item.productId}`
+            );
+          }
+
+          // Constructing full variantId as required by Shopify
+          const fullVariantId = `gid://shopify/ProductVariant/${variantData.variantId}`;
+
+          return {
+            variantId: fullVariantId,
+            quantity: item.quantity,
+          };
+        })
+      );
+
+      console.log("Prepared line items for checkout:", lineItems); // Log the prepared line items
 
       const checkoutFunctionUrl =
         "https://us-central1-romc-mobile-app.cloudfunctions.net/createCheckout-createCheckout";
-
-      // Make the request to your Firebase function
-      const response = await fetch(checkoutFunctionUrl, {
+      const checkoutResponse = await fetch(checkoutFunctionUrl, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ cartItems: lineItems }), // Send the lineItems as 'cartItems'
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cartItems: lineItems }),
       });
 
-      const jsonResponse = await response.json();
-      if (jsonResponse.url) {
-        // Redirect user to Shopify checkout using the returned URL
-        Linking.openURL(jsonResponse.url);
+      console.log(
+        "Received checkout response status:",
+        checkoutResponse.status
+      ); // Log the checkout response status
+      if (checkoutResponse.status === 200) {
+        const jsonResponse = await checkoutResponse.json();
+        console.log("Received checkout response:", jsonResponse); // Log the received checkout response
+        if (jsonResponse.url) {
+          console.log("Redirecting to checkout URL:", jsonResponse.url); // Log the checkout URL
+          navigation.navigate("Checkout", { checkoutUrl: jsonResponse.url });
+        } else {
+          console.log("Checkout URL not found in response"); // Log if checkout URL not found
+          Alert.alert("Error", "Checkout URL not found.");
+        }
       } else {
-        // Handle cases where no URL is returned
-        Alert.alert("Error", "Unable to proceed to checkout.");
+        const errorResponse = await checkoutResponse.text();
+        console.error("Failed to create checkout:", errorResponse); // Log failure to create checkout
+        Alert.alert("Error", "Unable to proceed to checkout: " + errorResponse);
       }
     } catch (error) {
-      console.error("Checkout Error:", error);
+      console.error("Checkout Error:", error); // Log any errors caught during checkout
       Alert.alert("Error", "An error occurred while trying to checkout.");
     }
   };

@@ -7,6 +7,7 @@ const sendEmail = require("./sendEmail");
 const login = require("./login");
 const createCheckout = require("./createCheckout");
 const getMenu = require("./getMenu");
+const findVariantId = require("./findVariantId");
 
 module.exports = {
   featuredCollection,
@@ -18,4 +19,5 @@ module.exports = {
   login,
   createCheckout,
   getMenu,
+  findVariantId,
 };
