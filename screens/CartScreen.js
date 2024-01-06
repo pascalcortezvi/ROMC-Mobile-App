@@ -7,6 +7,7 @@ import {
   Image,
   Pressable,
   Alert,
+  ActivityIndicator, // Import ActivityIndicator
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useIsFocused } from "@react-navigation/native";
@@ -18,6 +19,7 @@ export default function CartScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const isFocused = useIsFocused();
   const navigation = useNavigation();
+  const [isLoading, setIsLoading] = useState(false); // Step 1: Loading state
 
   useEffect(() => {
     loadCart();
@@ -90,6 +92,9 @@ export default function CartScreen() {
 
   const handleCheckout = async () => {
     console.log("Starting handleCheckout function"); // Log when function starts
+
+    setIsLoading(true); // Step 2: Set loading state to true
+
     try {
       const storedCart = await AsyncStorage.getItem("cart");
       console.log("Retrieved stored cart:", storedCart); // Log the retrieved stored cart
@@ -166,6 +171,8 @@ export default function CartScreen() {
     } catch (error) {
       console.error("Checkout Error:", error); // Log any errors caught during checkout
       Alert.alert("Error", "An error occurred while trying to checkout.");
+    } finally {
+      setIsLoading(false); // Step 3: Reset loading state when checkout is complete
     }
   };
 
@@ -197,11 +204,15 @@ export default function CartScreen() {
                 <View style={styles.quantityAndRemoveContainer}>
                   <View style={styles.quantitySelector}>
                     <Pressable onPress={() => decreaseQuantity(item.productId)}>
-                      <Text style={styles.quantityButtonText}>-</Text>
+                      <View style={styles.quantityButtonTextContainer}>
+                        <Text style={styles.quantityButtonText}>-</Text>
+                      </View>
                     </Pressable>
                     <Text style={styles.quantity}>{item.quantity}</Text>
                     <Pressable onPress={() => increaseQuantity(item.productId)}>
-                      <Text style={styles.quantityButtonText}>+</Text>
+                      <View style={styles.quantityButtonTextContainer}>
+                        <Text style={styles.quantityButtonText}>+</Text>
+                      </View>
                     </Pressable>
                   </View>
                   <Pressable onPress={() => removeItemFromCart(item.productId)}>
@@ -224,8 +235,19 @@ export default function CartScreen() {
             Total: ${calculateTotalPrice().toFixed(2)}
           </Text>
           <Text style={styles.tax}>Taxes will be calculated at checkout</Text>
-          <Pressable style={styles.checkoutButton} onPress={handleCheckout}>
-            <Text style={styles.checkoutButtonText}>CHECKOUT</Text>
+          <Pressable
+            style={[
+              styles.checkoutButton,
+              isLoading && styles.checkoutButtonLoading, // Apply loading style when isLoading is true
+            ]}
+            onPress={handleCheckout}
+            disabled={isLoading} // Disable the button when isLoading is true
+          >
+            {isLoading ? (
+              <ActivityIndicator color="#fff" size="small" /> // Show loading spinner
+            ) : (
+              <Text style={styles.checkoutButtonText}>CHECKOUT</Text>
+            )}
           </Pressable>
         </View>
       )}
@@ -244,8 +266,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingVertical: 25,
     paddingRight: 25,
-    borderBottomWidth: 1,
-    borderBottomColor: "#eeeeee",
+    borderWidth: 2, // Add borderBottomWidth property
+    borderColor: "#D2D2D2", // Add borderBottomColor property
     backgroundColor: "white",
     marginHorizontal: 20,
     marginVertical: 10,
@@ -254,8 +276,8 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     marginRight: 15,
-    width: 150,
-    height: 150,
+    width: 120,
+    height: 120,
     padding: 5,
   },
   image: {
@@ -285,18 +307,24 @@ const styles = StyleSheet.create({
   quantitySelector: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#D8D8D8",
     paddingHorizontal: 15,
     borderRadius: 10,
   },
+  quantityButtonTextContainer: {
+    borderRadius: 5,
+    backgroundColor: "#131313",
+  },
   quantityButtonText: {
-    padding: 10,
+    padding: 8,
+    paddingHorizontal: 15,
     fontWeight: "bold",
+    color: "white",
   },
   quantity: {
     paddingHorizontal: 15,
     paddingVertical: 5,
     fontWeight: "bold",
+    fontSize: 16,
   },
   checkoutContainer: {
     position: "absolute",
@@ -338,5 +366,8 @@ const styles = StyleSheet.create({
   },
   tax: {
     marginBottom: 15,
+  },
+  checkoutButtonLoading: {
+    opacity: 0.7,
   },
 });

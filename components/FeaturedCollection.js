@@ -153,7 +153,9 @@ export default function FeaturedCollection({
                 </View>
                 <Text style={styles.productTitle}>{item.title}</Text>
                 {item.compareAtPrice && (
-                  <Text style={styles.saleLabel}>SALE</Text>
+                  <View style={styles.saleLabelContainer}>
+                    <Text style={styles.saleLabel}>SALE</Text>
+                  </View>
                 )}
               </View>
             </TouchableWithoutFeedback>
@@ -192,8 +194,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     margin: 10,
     width: 250,
-    borderWidth: 1,
-    borderColor: "#B4B4B4",
+    borderWidth: 2,
+    borderColor: "#D2D2D2",
   },
   productImageContainer: {
     height: 150,
@@ -228,16 +230,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  saleLabel: {
+  saleLabelContainer: {
+    borderRadius: 5,
+    backgroundColor: "#D80000",
     position: "absolute",
-    top: 10,
-    right: 10,
+    top: 15,
+    right: 15,
+  },
+  saleLabel: {
     color: "white",
-    backgroundColor: "#131313",
     fontSize: 13,
     fontWeight: "bold",
-    padding: 5,
-    borderRadius: 5,
+    padding: 8,
   },
   availabilityContainer: {
     borderRadius: 10,
@@ -253,22 +257,18 @@ const styles = StyleSheet.create({
     flexDirection: "row", // Align items in a row within the inStoreContainer
     alignItems: "center",
     justifyContent: "center",
-    padding: 5,
+    paddingVertical: 10,
     borderRadius: 5,
-    backgroundColor: "#ECECEC",
-    borderWidth: 1,
-    borderColor: "#B4B4B4",
+    backgroundColor: "#131313",
   },
   onlineContainer: {
     flex: 1,
     flexDirection: "row", // Align items in a row within the onlineContainer
     alignItems: "center",
     justifyContent: "center",
-    padding: 5,
+    paddingVertical: 10,
     borderRadius: 5,
-    backgroundColor: "#ECECEC",
-    borderWidth: 1,
-    borderColor: "#B4B4B4",
+    backgroundColor: "#131313",
   },
   blockTitle: {
     fontSize: 12,
@@ -287,19 +287,19 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   blinkingDot: {
-    width: 5,
-    height: 5,
-    borderRadius: 5,
-    backgroundColor: "#131313",
+    width: 10,
+    height: 10,
+    borderRadius: 10,
+    backgroundColor: "#71FF9A",
     marginRight: 8,
   },
   availableText: {
-    color: "#131313", // Green for available
+    color: "white", // Green for available
     fontSize: 12,
     fontWeight: "bold",
   },
   notAvailableText: {
-    color: "#C91414", // Red for not available
+    color: "white", // Red for not available
     fontSize: 12,
     fontWeight: "bold",
   },
@@ -314,9 +314,9 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   unavailableSymbol: {
-    color: "#C91414",
+    color: "white",
     marginRight: 5,
-    fontSize: 10,
+    fontSize: 12,
     fontWeight: "bold",
   },
 });

@@ -306,6 +306,8 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 10,
     backgroundColor: "white",
+    borderWidth: 2,
+    borderColor: "#D2D2D2",
   },
   image: {
     height: "100%",
@@ -319,6 +321,8 @@ const styles = StyleSheet.create({
     marginRight: 15,
     borderRadius: 10,
     padding: 10,
+    borderWidth: 2,
+    borderColor: "#D2D2D2",
   },
   thumbnailImage: {
     height: "100%",

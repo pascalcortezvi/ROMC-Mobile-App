@@ -135,9 +135,9 @@ const styles = StyleSheet.create({
     // Adjust your menuItem style
     flexDirection: "column", // Changed to column to stack submenu items
     alignItems: "flex-start", // Align submenu items to the start
-    borderWidth: 1,
-    borderColor: "#B1B1B1",
-    marginBottom: 10,
+    borderWidth: 2,
+    borderColor: "#D2D2D2",
+    marginBottom: 15,
     backgroundColor: "#ececec",
     paddingHorizontal: 15,
     paddingVertical: 15,
