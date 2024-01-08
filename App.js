@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -11,6 +11,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { UserContext } from "./contexts/UserContext";
 import Header from "./components/Header";
 import HomeScreen from "./screens/HomeScreen";
 import ShopScreen from "./screens/ShopScreen";
@@ -18,6 +19,8 @@ import AccountScreen from "./screens/AccountScreen";
 import CartScreen from "./screens/CartScreen";
 import ProductScreen from "./screens/ProductScreen";
 import CheckoutScreen from "./screens/CheckoutScreen";
+import LoginScreen from "./screens/LoginScreen";
+import CreateAccountScreen from "./screens/CreateAccountScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -41,10 +44,25 @@ function ShopStack() {
 }
 
 function AccountStack() {
+  const { user } = useContext(UserContext);
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="AccountScreen" component={AccountScreen} />
-      <Stack.Screen name="Product" component={ProductScreen} />
+      {!user ? (
+        // If no user is authenticated, show the LoginScreen
+        <>
+          <Stack.Screen name="LoginScreen" component={LoginScreen} />
+          <Stack.Screen
+            name="CreateAccountScreen"
+            component={CreateAccountScreen}
+          />
+        </>
+      ) : (
+        // If the user is authenticated, show the AccountScreen and other screens
+        <>
+          <Stack.Screen name="AccountScreen" component={AccountScreen} />
+          <Stack.Screen name="Product" component={ProductScreen} />
+        </>
+      )}
     </Stack.Navigator>
   );
 }

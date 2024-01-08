@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { UserContext } from "../contexts/UserContext";
 
-export default function LoginPage({ navigation }) {
+export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -92,17 +92,17 @@ export default function LoginPage({ navigation }) {
         autoCapitalize="none"
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+      <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
 
-      {/* Conditionally render text based on user's authentication and tags */}
-      {user && user.accessToken && (
-        <Text style={styles.authStatusText}>Logged In</Text>
-      )}
-      <Text style={styles.tagStatusText}>
-        {user && user.tags && user.tags.includes("staff") ? "STAFF AUTHENTICATED" : "NORMAL USER"}
-      </Text>
+      <Text>Don't have an account?</Text>
+      <TouchableOpacity
+        style={styles.CreateAccountButton}
+        onPress={() => navigation.navigate("CreateAccountScreen")}
+      >
+        <Text style={styles.buttonText}>Create Account</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -130,11 +130,19 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 20,
   },
-  button: {
+  loginButton: {
     width: "100%",
     padding: 15,
     backgroundColor: "#131313",
     borderRadius: 10,
+    marginBottom: 40,
+  },
+  CreateAccountButton: {
+    width: "75%",
+    padding: 15,
+    backgroundColor: "#D80000",
+    borderRadius: 10,
+    marginTop: 8,
   },
   buttonText: {
     color: "#fff",

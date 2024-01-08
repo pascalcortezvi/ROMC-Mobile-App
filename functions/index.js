@@ -8,6 +8,8 @@ const login = require("./login");
 const createCheckout = require("./createCheckout");
 const getMenu = require("./getMenu");
 const findVariantId = require("./findVariantId");
+const createAccount = require("./createAccount");
+const checkCustomerExists = require("./checkCustomerExists");
 
 module.exports = {
   featuredCollection,
@@ -20,4 +22,6 @@ module.exports = {
   createCheckout,
   getMenu,
   findVariantId,
+  createAccount,
+  checkCustomerExists,
 };
