@@ -1,5 +1,4 @@
-// CreateAccountScreen.js
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   View,
   Text,
@@ -13,21 +12,13 @@ export default function CreateAccountScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isExistingUser, setIsExistingUser] = useState(false);
-  const [additionalInfo, setAdditionalInfo] = useState({
-    first_name: "",
-    last_name: "",
-    phone: "",
-    addresses: [
-      {
-        /* address fields */
-      },
-    ],
-  });
+  const [isCheckingUser, setIsCheckingUser] = useState(false);
 
   const handleCheckUser = async () => {
+    setIsCheckingUser(true); // Start checking
     try {
       const response = await fetch(
-        "https://us-central1-romc-mobile-app.cloudfunctions.net/checkUserExists",
+        "https://us-central1-romc-mobile-app.cloudfunctions.net/checkUserExists-checkUserExists",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -37,19 +28,16 @@ export default function CreateAccountScreen({ navigation }) {
 
       const data = await response.json();
       if (response.ok) {
-        if (data.exists) {
-          setIsExistingUser(true);
-          setAdditionalInfo({ ...data.userInfo }); // Set existing user info
-        } else {
-          // Proceed to collect additional information
-          setIsExistingUser(false);
-        }
+        setIsExistingUser(data.exists);
       } else {
         // Handle errors
+        Alert.alert("Error", "Failed to check user existence.");
       }
     } catch (error) {
       console.error("Error checking user:", error);
+      Alert.alert("Error", "An error occurred while checking the user.");
     }
+    setIsCheckingUser(false); // Finish checking
   };
 
   const handleCreateAccount = async () => {
@@ -71,7 +59,6 @@ export default function CreateAccountScreen({ navigation }) {
       const data = await response.json();
 
       if (response.ok) {
-        // Handle successful account creation
         Alert.alert(
           "Account Created",
           "Your account has been successfully created."
@@ -114,13 +101,14 @@ export default function CreateAccountScreen({ navigation }) {
         autoCapitalize="none"
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleCreateAccount}>
-        <Text style={styles.buttonText}>Create Account</Text>
+      <TouchableOpacity style={styles.button} onPress={handleCheckUser}>
+        <Text style={styles.buttonText}>Check User</Text>
       </TouchableOpacity>
 
-      {!isExistingUser && (
+      {!isExistingUser && !isCheckingUser && (
         <View>
-          <Text>YES</Text>
+          <Text>Additional information fields go here...</Text>
+          {/* Render additional form fields here */}
         </View>
       )}
     </View>
